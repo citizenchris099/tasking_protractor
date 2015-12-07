@@ -1,0 +1,52 @@
+{
+  "ecmaVersion": 5,
+  "plugins": {
+    "guess-types": {
+      
+    },
+    "outline": {
+      
+    },
+    "jasmine": {
+      
+    },
+    "node": {
+      
+    },
+    "lint": {
+      
+    },
+    "jscs": {
+      
+    },
+    "jshint": {
+      
+    },
+    "highlight": {
+      
+    },
+    "meteor": {
+      
+    },
+    "angular": {
+      
+    },
+    "yui3": {
+      
+    },
+    "protractor": {
+      
+    },
+    "node-extension": {
+      
+    },
+    "bootstrap": {
+      
+    }
+  },
+  "libs": [
+    "browser",
+    "chai",
+    "jquery"
+  ]
+}
