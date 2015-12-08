@@ -24,14 +24,28 @@ page.prototype.isLoaded = function(element1, element2) {
 	chkElementPresent(element2);
 };
 
-page.prototype.findElement = function(parent, child){
+page.prototype.findElement = function(parent, child) {
 	return browser.driver.findElement(parent).findElement(child);
+}
+
+page.prototype.findElements = function(parent, child) {
+	return browser.driver.findElement(parent).findElements(child);
 }
 
 page.prototype.dynamicSendKeys = function(parent, child, value) {
 	browser.actions().mouseMove(
 			browser.driver.findElement(parent).findElement(child)).click()
-			.sendKeys(value , protractor.Key.ENTER).perform();
+			.sendKeys(value, protractor.Key.ENTER).perform();
+};
+
+page.prototype.dynamicSendKeysLoop = function(parent, child, value) {
+	browser.actions().mouseMove(
+			browser.driver.findElement(parent).findElement(child)).click()
+			.perform();
+	for (count = 0; count < value.length; count++) {
+		browser.actions().sendKeys(value[count], protractor.Key.ENTER)
+				.perform();
+	}
 };
 
 exports.page = new page();

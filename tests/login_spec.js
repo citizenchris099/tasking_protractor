@@ -8,8 +8,10 @@ var username002 = 'testusername2';
 var password002 = 'testpassword2';
 var uNameError = "User not found";
 var pWordError = "Incorrect password";
-var addTask = [ "location" ];
-var taskEntry = [ "locationEntry" ]
+var addTask = [ "addTaskSummary", "addTasklocation", "addTasklabels",
+		"addTaskDescription", "addTaskAssignee", "addTaskDueDate" ];
+var taskEntry = [ "summaryEntry", "locationEntry", "labelEntry",
+		"descriptionEntry", "assigneeEntry" ]
 
 describe('tasking tests', function() {
 

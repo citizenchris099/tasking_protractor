@@ -1,27 +1,27 @@
-var basePage = require('./page.js').page;
-
-var locators = {};
-locators.userName = by.xpath("//input[@placeholder='Username']");
-locators.passWord = by.xpath("//input[@placeholder='Password']");
-locators.login = by.xpath("//input[@type='submit']");
-
 var login_page = function() {
 };
+var basePage = require('./page.js').page;
+var locatorMap = new Map();
+locatorMap.set("userName", by.xpath("//input[@placeholder='Username']"));
+locatorMap.set("passWord", by.xpath("//input[@placeholder='Password']"));
+locatorMap.set("login", by.xpath("//input[@type='submit']"));
 
 login_page.prototype.isLoginPageLoaded = function() {
-	basePage.isLoaded(locators.userName, locators.passWord);
+	basePage.isLoaded(locatorMap.get("userName"), locatorMap.get("passWord"));
+}
+
+var logIn = function(uName, pWord) {
+	element(locatorMap.get("userName")).sendKeys(uName);
+	element(locatorMap.get("passWord")).sendKeys(pWord);
+	element(locatorMap.get("login")).click();
 }
 
 login_page.prototype.taskingLogin = function(uName, pWord) {
-	element(locators.userName).sendKeys(uName);
-	element(locators.passWord).sendKeys(pWord);
-	element(locators.login).click();
+	logIn(uName, pWord);
 };
 
 login_page.prototype.taskingLoginFail = function(uName, pWord, msg) {
-	element(locators.userName).sendKeys(uName);
-	element(locators.passWord).sendKeys(pWord);
-	element(locators.login).click();
+	logIn(uName, pWord);
 	basePage.msgCheck(msg);
 };
 
