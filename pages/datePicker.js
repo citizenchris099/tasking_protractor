@@ -86,7 +86,7 @@ MonthMap.set("December", "12");
 
 var today = new Date();
 var dd = today.getDate();
-var tomorrow = today.getDate() + 1;
+var tomorrow = today.getDate();
 var mm = today.getMonth() + 1; // January is 0!
 var yyyy = today.getFullYear();
 var displayDay;
@@ -98,15 +98,16 @@ if (dd < 10) {
 
 today = mm + '/' + displayDay + '/' + yyyy;
 
-datePicker.prototype.testDate = function() {
-	if (tomorrow < 10) {
-		displayTomorrow = '0' + tomorrow
+datePicker.prototype.testDate = function(value) {
+	var testday = tomorrow + value;
+	if (testday < 10) {
+		displayTomorrow = '0' + testday
 	}
 	var testDate = mm + '/' + displayTomorrow + '/' + yyyy;
 	return testDate.toString()
 }
 
-datePicker.prototype.useDatePicker = function() {
+datePicker.prototype.useDatePicker = function(value) {
 	basePage.findElement(locatorMap.get("datePickerParent"),
 			locatorMap.get("datePickerCurrentMonth")).getText().then(
 			function(text) {
@@ -118,17 +119,17 @@ datePicker.prototype.useDatePicker = function() {
 				if (splitDatNumber != mm) {
 					basePage.findElement(locatorMap.get("datePickerParent"),
 							locatorMap.get("datePickerNextMonth")).click();
-					count++
 				}
 			});
-	console.log("tomorrow = " + tomorrow);
-	console.log("locator tomorrow = " + locatorMap.get(tomorrow.toString()));
-	var days = element.all(locatorMap.get(tomorrow.toString()));
-	if (tomorrow > 25) {
+	var testday = tomorrow + value;
+	console.log("tomorrow = " + testday);
+	console.log("locator tomorrow = " + locatorMap.get(testday.toString()));
+	var days = element.all(locatorMap.get(testday.toString()));
+	if (testday > 25) {
 		days.get(1).element(locatorMap.get("datePickerParent")).element(
-				locatorMap.get(tomorrow.toString())).click();
+				locatorMap.get(testday.toString())).click();
 	} else
 		days.get(0).element(locatorMap.get("datePickerParent")).element(
-				locatorMap.get(tomorrow.toString())).click();
+				locatorMap.get(testday.toString())).click();
 };
 exports.datePicker = new datePicker();

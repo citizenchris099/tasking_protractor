@@ -16,7 +16,7 @@ page.prototype.msgCheck = function(msg) {
 }
 
 page.prototype.checkElementPresent = function(locator) {
-	chkElementPresent(element1);
+	chkElementPresent(locator);
 };
 
 page.prototype.isLoaded = function(element1, element2) {

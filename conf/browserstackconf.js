@@ -2,7 +2,7 @@
 exports.config = {
 	// directConnect : true,
 
-	capabilities : {
+	multiCapabilities : [ {
 		'browserstack.user' : 'chrismanning1',
 		'browserstack.key' : 'RXqoAFZLbgBpVNY91AsY',
 
@@ -15,12 +15,27 @@ exports.config = {
 		'os' : 'Windows',
 		'os_version' : '10',
 		'resolution' : '1024x768'
-	},
+	}, {
+		'browserstack.user' : 'chrismanning1',
+		'browserstack.key' : 'RXqoAFZLbgBpVNY91AsY',
 
-	framework : 'jasmine2',
+		// Needed for testing localhost
+		'browserstack.local' : 'true',
+		'browserstack.localIdentifier' : 'Test123',
 
-	seleniumAddress : 'http://localhost:4444/wd/hub',
-	// seleniumAddress : 'http://hub.browserstack.com/wd/hub',
+		'browser' : 'Firefox',
+		'browser_version' : '42.0',
+		'os' : 'Windows',
+		'os_version' : '10',
+		'resolution' : '1024x768'
+	}
+
+	],
+
+	// framework : 'jasmine2',
+
+	// seleniumAddress : 'http://localhost:4444/wd/hub',
+	seleniumAddress : 'http://hub.browserstack.com/wd/hub',
 
 	specs : [ '../tests/login_spec.js' ],
 
