@@ -11,7 +11,7 @@ locatorMap.set("logOut", by.xpath("//span[.='Log Out']"));
  * locators: add task
  */
 locatorMap.set("showAddTaskParent", by
-		.xpath("//div[contains(@class,'taskquickaddtoggle')]"));
+		.xpath("//button[contains(@class,'taskquickaddtoggle-button')]"));
 locatorMap.set("showAddTaskForm", by
 		.xpath(".//i[contains(@class,'scicon-plus-circle-outline')]"));
 locatorMap.set("addTaskParent", by
@@ -33,7 +33,17 @@ locatorMap.set("addTaskCreate", by.xpath("//button[.='Create']"));
  */
 locatorMap
 		.set("taskListParent", by.xpath("//div[@class='taskqueue-tasklist']"));
+locatorMap.set("moreTaskParent", by.xpath("//div[@class='load-more']"));
 locatorMap.set("moreTaskButton", by.xpath(".//button[.='More Tasks']"));
+
+var flow = protractor.promise.controlFlow();
+function waitOne() {
+	return protractor.promise.delayed(1000);
+}
+
+function sleep() {
+	flow.execute(waitOne);
+}
 
 var revealAddTaskForm = function() {
 	basePage.findElement(locatorMap.get("showAddTaskParent"),
@@ -46,28 +56,25 @@ var clickDatePicker = function(parent) {
 };
 
 var taskInQueue = function(value) {
-	return by.xpath(".//span[contains(text(), '" + value
-			+ "')] [@class='js-taskqueue-task-summary']");
+	return basePage.findElement(locatorMap.get("showAddTaskParent"), by
+			.xpath("//span[contains(text(), '" + value
+					+ "')] [@class='js-taskqueue-task-summary']"))
 };
 
-var clickMoreTasks = function() {
-	var moreTask = element(locatorMap.get("taskListParent")).element(
-			locatorMap.get("moreTaskButton"));
-	moreTask.isDisplayed().then(function() {
-		moreTask.click();
-		checkTaskDisplayed();
+var clickMoreTasks = function(value) {
+	basePage.findElement(locatorMap.get("moreTaskParent"),
+			locatorMap.get("moreTaskButton")).click().then(function() {
+		checkTaskDisplayed(value);
 	}, function(err) {
 		throw err;
-	})
+	});
 };
 
 var checkTaskDisplayed = function(value) {
-	var task = element(locatorMap.get("taskListParent")).element(
-			taskInQueue(value));
-	task.isDisplayed().then(function() {
-		task.click();
+	taskInQueue(value).isDisplayed().then(function() {
+		console.log("checkTaskDisplayed task displayed");
 	}, function(err) {
-		clickMoreTasks();
+		clickMoreTasks(value);
 	});
 }
 
@@ -84,29 +91,21 @@ tasking_main_page.prototype.addTask = function(value2, obj) {
 	revealAddTaskForm();
 	for (var count = 0; count < value2.length; count++) {
 		if (value2[count] == "labelEntry") {
-			browser.driver.sleep(1000);
+			sleep();
 			basePage.dynamicSendKeysLoop(locatorMap.get("addTaskParent"),
 					locatorMap.get("addTasklabels"), obj[value2[count]]);
 		} else if (value2[count] == "addedDays") {
 			clickDatePicker("addTaskParent");
 			datePicker.useDatePicker(obj[value2[count]]);
-		} else if (value2[count] == "summaryEntry") {
+		} else {
+			sleep();
 			basePage.dynamicSendKeys(locatorMap.get("addTaskParent"),
-					locatorMap.get("addTaskSummary"), obj[value2[count]]);
-		} else if (value2[count] == "descriptionEntry") {
-			basePage.dynamicSendKeys(locatorMap.get("addTaskParent"),
-					locatorMap.get("addTaskDescription"), obj[value2[count]]);
-		} else if (value2[count] == "locationEntry") {
-			basePage.dynamicSendKeys(locatorMap.get("addTaskParent"),
-					locatorMap.get("addTasklocation"), obj[value2[count]]);
-		} else if (value2[count] == "assigneeEntry") {
-			browser.driver.sleep(1000);
-			basePage.dynamicSendKeys(locatorMap.get("addTaskParent"),
-					locatorMap.get("addTaskAssignee"), obj[value2[count]]);
+					locatorMap.get(value2[count]), obj[value2[count]]);
 		}
 	}
-	browser.driver.sleep(1000);
+	sleep();
 	element(locatorMap.get("addTaskCreate")).click();
+	checkTaskDisplayed(obj["addTaskSummary"]);
 };
 
 tasking_main_page.prototype.checkTaskInQueuePresent = function(value) {

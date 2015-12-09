@@ -111,19 +111,14 @@ datePicker.prototype.useDatePicker = function(value) {
 	basePage.findElement(locatorMap.get("datePickerParent"),
 			locatorMap.get("datePickerCurrentMonth")).getText().then(
 			function(text) {
-				console.log("month and year displayed = " + text);
 				var splitDate = text.split(' ');
-				console.log("month displayed = " + splitDate[0]);
 				var splitDatNumber = MonthMap.get(splitDate[0]);
-				console.log("month number displayed = " + splitDatNumber);
 				if (splitDatNumber != mm) {
 					basePage.findElement(locatorMap.get("datePickerParent"),
 							locatorMap.get("datePickerNextMonth")).click();
 				}
 			});
 	var testday = tomorrow + value;
-	console.log("tomorrow = " + testday);
-	console.log("locator tomorrow = " + locatorMap.get(testday.toString()));
 	var days = element.all(locatorMap.get(testday.toString()));
 	if (testday > 25) {
 		days.get(1).element(locatorMap.get("datePickerParent")).element(

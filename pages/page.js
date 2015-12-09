@@ -25,7 +25,7 @@ page.prototype.isLoaded = function(element1, element2) {
 };
 
 page.prototype.findElement = function(parent, child) {
-	return browser.driver.findElement(parent).findElement(child);
+	return element(parent).element(child);
 }
 
 page.prototype.findElements = function(parent, child) {

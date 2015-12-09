@@ -9,8 +9,8 @@ var username002 = 'testusername2';
 var password002 = 'testpassword2';
 var uNameError = "User not found";
 var pWordError = "Incorrect password";
-var taskEntry = [ "summaryEntry", "addedDays", "assigneeEntry", "labelEntry",
-		"descriptionEntry", "locationEntry" ]
+var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation",
+		"labelEntry", "addTaskAssignee" ]
 var summary = phraseGen.randomPhrase();
 var description = phraseGen.randomPhrase();
 var label1 = phraseGen.randomLabel();
@@ -20,15 +20,15 @@ var label4 = phraseGen.randomLabel();
 var location = phraseGen.randomLocation();
 var user1 = "Test User";
 var user2 = "Test User2";
-var days = 3;
+var days = 1;
 
-function taskData(summaryEntry, descriptionEntry, locationEntry, labelEntry,
-		assigneeEntry, addedDays) {
-	this.summaryEntry = summaryEntry;
-	this.descriptionEntry = descriptionEntry;
-	this.locationEntry = locationEntry;
+function taskData(addTaskSummary, addTaskDescription, addTasklocation,
+		labelEntry, addTaskAssignee, addedDays) {
+	this.addTaskSummary = addTaskSummary;
+	this.addTaskDescription = addTaskDescription;
+	this.addTasklocation = addTasklocation;
 	this.labelEntry = labelEntry;
-	this.assigneeEntry = assigneeEntry;
+	this.addTaskAssignee = addTaskAssignee;
 	this.addedDays = addedDays;
 };
 
@@ -58,9 +58,9 @@ describe('tasking tests', function() {
 			login_page.isLoginPageLoaded();
 		});
 
-		it('add a location to a task', function() {
+		it('simple add task', function() {
+			console.log("summary = " + summary);
 			tasking_main_page.addTask(taskEntry, addTaskTest);
-			tasking_main_page.checkTaskInQueuePresent(addTaskTest["summaryEntry"]);
 		});
 	});
 
@@ -73,11 +73,11 @@ describe('tasking tests', function() {
 			login_page.isLoginPageLoaded();
 		});
 
-		it('add a location to a task', function() {
+		xit('bad username test', function() {
 			login_page.taskingLoginFail("wrong", password001, uNameError);
 		});
 
-		it('add a location to a task', function() {
+		xit('bad password test', function() {
 			login_page.taskingLoginFail(username001, "bad", pWordError);
 		});
 	});

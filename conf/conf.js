@@ -14,13 +14,13 @@ exports.config = {
 		'browser_version' : '46.0',
 		'os' : 'Windows',
 		'os_version' : '10',
-		'resolution' : '1024x768'
+		'resolution' : '1920x1080'
 	},
 
 	framework : 'jasmine2',
 
 	seleniumAddress : 'http://localhost:4444/wd/hub',
-	// seleniumAddress : 'http://hub.browserstack.com/wd/hub',
+//	 seleniumAddress : 'http://hub.browserstack.com/wd/hub',
 
 	specs : [ '../tests/login_spec.js' ],
 
