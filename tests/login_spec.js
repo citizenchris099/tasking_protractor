@@ -10,7 +10,7 @@ var password002 = 'testpassword2';
 var uNameError = "User not found";
 var pWordError = "Incorrect password";
 var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation",
-		"labelEntry", "addTaskAssignee" ]
+		"labelEntry", "addTaskAssignee", "addedDays"]
 var summary = phraseGen.randomPhrase();
 var description = phraseGen.randomPhrase();
 var label1 = phraseGen.randomLabel();
@@ -20,7 +20,7 @@ var label4 = phraseGen.randomLabel();
 var location = phraseGen.randomLocation();
 var user1 = "Test User";
 var user2 = "Test User2";
-var days = 1;
+var days = 30;
 
 function taskData(addTaskSummary, addTaskDescription, addTasklocation,
 		labelEntry, addTaskAssignee, addedDays) {
@@ -61,6 +61,7 @@ describe('tasking tests', function() {
 		it('simple add task', function() {
 			console.log("summary = " + summary);
 			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(addTaskTest);
 		});
 	});
 

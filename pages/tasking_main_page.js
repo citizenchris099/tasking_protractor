@@ -36,6 +36,14 @@ locatorMap
 locatorMap.set("moreTaskParent", by.xpath("//div[@class='load-more']"));
 locatorMap.set("moreTaskButton", by.xpath(".//button[.='More Tasks']"));
 
+/**
+ * locators: task details
+ */
+locatorMap.set("taskDetailsParent", by.xpath("//div[@class='taskdetails']"));
+locatorMap.set("taskDetailsSummary", by.xpath(".//textarea[@name='summary']"));
+locatorMap.set("taskDetailsDescription", by
+		.xpath(".//textarea[@name='description']"));
+
 var flow = protractor.promise.controlFlow();
 function waitOne() {
 	return protractor.promise.delayed(1000);
@@ -43,28 +51,83 @@ function waitOne() {
 
 function sleep() {
 	flow.execute(waitOne);
+};
+
+/**
+ * elements
+ */
+
+var avatarElement = function() {
+	return element(locatorMap.get("loginName"));
+}
+
+var logOutElement = function() {
+	return element(locatorMap.get("logOut"));
+}
+
+var addTaskElement = function() {
+	return basePage.findElement(locatorMap.get("showAddTaskParent"), locatorMap
+			.get("showAddTaskForm"));
 }
 
 var revealAddTaskForm = function() {
-	basePage.findElement(locatorMap.get("showAddTaskParent"),
-			locatorMap.get("showAddTaskForm")).click();
+	addTaskElement().click();
 };
 
-var clickDatePicker = function(parent) {
-	basePage.findElement(locatorMap.get(parent),
-			locatorMap.get("addTaskDueDate")).click();
+var datePickerElement = function(parent) {
+	return basePage.findElement(locatorMap.get(parent), locatorMap
+			.get("addTaskDueDate"));
+};
+
+var createTaskElement = function(){
+	return element(locatorMap.get("addTaskCreate"))
 };
 
 var taskInQueue = function(value) {
-	return basePage.findElement(locatorMap.get("showAddTaskParent"), by
+	return basePage.findElement(locatorMap.get("taskListParent"), by
 			.xpath("//span[contains(text(), '" + value
 					+ "')] [@class='js-taskqueue-task-summary']"))
 };
 
-var clickMoreTasks = function(value) {
-	basePage.findElement(locatorMap.get("moreTaskParent"),
-			locatorMap.get("moreTaskButton")).click().then(function() {
-		checkTaskDisplayed(value);
+var moreTaskElement = function() {
+	return basePage.findElement(locatorMap.get("moreTaskParent"), locatorMap
+			.get("moreTaskButton"));
+};
+
+var taskDetailLocationAssignee = function(value) {
+	return basePage.findElement(locatorMap.get("taskDetailsParent"), by
+			.xpath(".//div[contains(text(), '" + value
+					+ "')] [@class='Select-placeholder']"));
+};
+
+var taskDetailSummaryElement = function() {
+	return basePage.findElement(locatorMap.get("taskDetailsParent"), locatorMap
+			.get("taskDetailsSummary"));
+};
+
+var taskDetailDescriptionElement = function() {
+	return basePage.findElement(locatorMap.get("taskDetailsParent"), locatorMap
+			.get("taskDetailsDescription"));
+};
+
+var taskDetailLabelElement = function(value) {
+	return basePage.findElement(locatorMap.get("taskDetailsParent"), by
+			.xpath(".//span[contains(text(), '×')] [contains(@data-reactid,'"
+					+ value + "')]"))
+};
+
+/**
+ * actions
+ */
+
+var clickMoreTasks = function(value, action) {
+	moreTaskElement().click().then(function() {
+		if (action == "display") {
+			checkTaskDisplayed(value);
+		} else if (action == "click") {
+			selectTaskDisplayed(value);
+		}
+
 	}, function(err) {
 		throw err;
 	});
@@ -72,19 +135,36 @@ var clickMoreTasks = function(value) {
 
 var checkTaskDisplayed = function(value) {
 	taskInQueue(value).isDisplayed().then(function() {
-		console.log("checkTaskDisplayed task displayed");
 	}, function(err) {
-		clickMoreTasks(value);
+		clickMoreTasks(value, "display");
 	});
-}
+};
+
+var selectTaskDisplayed = function(value) {
+	taskInQueue(value).click().then(function() {
+	}, function(err) {
+		clickMoreTasks(value, "click");
+	});
+};
+
+var checkTaskDetailsLabels = function(obj) {
+	var labelsUsed = obj["labelEntry"];
+	for (var count = 0; count < labelsUsed.length; count++) {
+		basePage.displayCheck(taskDetailLabelElement(labelsUsed[count]), true);
+	}
+};
+
+/**
+ * services
+ */
 
 tasking_main_page.prototype.isMainPageLoaded = function() {
 	basePage.isLoaded(locatorMap.get("searchBox"), locatorMap.get("loginName"));
 };
 
 tasking_main_page.prototype.logOut = function() {
-	element(locatorMap.get("loginName")).click();
-	element(locatorMap.get("logOut")).click();
+	avatarElement().click();
+	logOutElement().click();
 };
 
 tasking_main_page.prototype.addTask = function(value2, obj) {
@@ -95,7 +175,7 @@ tasking_main_page.prototype.addTask = function(value2, obj) {
 			basePage.dynamicSendKeysLoop(locatorMap.get("addTaskParent"),
 					locatorMap.get("addTasklabels"), obj[value2[count]]);
 		} else if (value2[count] == "addedDays") {
-			clickDatePicker("addTaskParent");
+			datePickerElement("addTaskParent").click();
 			datePicker.useDatePicker(obj[value2[count]]);
 		} else {
 			sleep();
@@ -104,12 +184,22 @@ tasking_main_page.prototype.addTask = function(value2, obj) {
 		}
 	}
 	sleep();
-	element(locatorMap.get("addTaskCreate")).click();
+	createTaskElement().click();
 	checkTaskDisplayed(obj["addTaskSummary"]);
 };
 
-tasking_main_page.prototype.checkTaskInQueuePresent = function(value) {
-	checkTaskDisplayed(value);
-}
+tasking_main_page.prototype.checkTaskDetails = function(obj) {
+	selectTaskDisplayed(obj["addTaskSummary"]);
+	checkTaskDetailsLabels(obj);
+	basePage.displayCheck(taskDetailLocationAssignee(obj["addTaskAssignee"]),
+			true);
+	basePage.displayCheck(taskDetailLocationAssignee(obj["addTasklocation"]),
+			true);
+	basePage.textCheck(taskDetailSummaryElement(), obj["addTaskSummary"]);
+
+	basePage.textCheck(taskDetailDescriptionElement(),
+			obj["addTaskDescription"]);
+
+};
 
 exports.tasking_main_page = new tasking_main_page();

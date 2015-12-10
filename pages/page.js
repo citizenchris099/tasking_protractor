@@ -11,6 +11,10 @@ page.prototype.textCheck = function(element, string) {
 	expect(element.getText()).toEqual(string);
 };
 
+page.prototype.displayCheck = function(element, display) {
+	expect(element.isDisplayed()).toBe(display);
+}
+
 page.prototype.msgCheck = function(msg) {
 	chkElementPresent(by.xpath("//*[contains(text(), '" + msg + "')]"));
 }

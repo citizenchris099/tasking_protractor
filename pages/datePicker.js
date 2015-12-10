@@ -119,6 +119,7 @@ datePicker.prototype.useDatePicker = function(value) {
 				}
 			});
 	var testday = tomorrow + value;
+	console.log("useDatePicker testDay = "+testday)
 	var days = element.all(locatorMap.get(testday.toString()));
 	if (testday > 25) {
 		days.get(1).element(locatorMap.get("datePickerParent")).element(
