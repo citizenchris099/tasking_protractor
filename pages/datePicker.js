@@ -83,20 +83,18 @@ MonthMap.set("September", "9");
 MonthMap.set("October", "10");
 MonthMap.set("November", "11");
 MonthMap.set("December", "12");
-
-var today = new Date();
-var dd = today.getDate();
-var tomorrow = today.getDate();
-var mm = today.getMonth() + 1; // January is 0!
-var yyyy = today.getFullYear();
-var displayDay;
-var displayTomorrow;
-
-if (dd < 10) {
-	displayDay = '0' + dd
-}
-
-today = mm + '/' + displayDay + '/' + yyyy;
+MonthMap.set("Jan", "1");
+MonthMap.set("Feb", "2");
+MonthMap.set("Mar", "3");
+MonthMap.set("Apr", "4");
+MonthMap.set("May", "5");
+MonthMap.set("Jun", "6");
+MonthMap.set("Jul", "7");
+MonthMap.set("Aug", "8");
+MonthMap.set("Sep", "9");
+MonthMap.set("Oct", "10");
+MonthMap.set("Nov", "11");
+MonthMap.set("Dec", "12");
 
 datePicker.prototype.testDate = function(value) {
 	var testday = tomorrow + value;
@@ -105,27 +103,58 @@ datePicker.prototype.testDate = function(value) {
 	}
 	var testDate = mm + '/' + displayTomorrow + '/' + yyyy;
 	return testDate.toString()
-}
+};
 
-datePicker.prototype.useDatePicker = function(value) {
-	basePage.findElement(locatorMap.get("datePickerParent"),
-			locatorMap.get("datePickerCurrentMonth")).getText().then(
-			function(text) {
-				var splitDate = text.split(' ');
-				var splitDatNumber = MonthMap.get(splitDate[0]);
-				if (splitDatNumber != mm) {
-					basePage.findElement(locatorMap.get("datePickerParent"),
-							locatorMap.get("datePickerNextMonth")).click();
-				}
-			});
-	var testday = tomorrow + value;
-	console.log("useDatePicker testDay = "+testday)
-	var days = element.all(locatorMap.get(testday.toString()));
-	if (testday > 25) {
-		days.get(1).element(locatorMap.get("datePickerParent")).element(
-				locatorMap.get(testday.toString())).click();
-	} else
-		days.get(0).element(locatorMap.get("datePickerParent")).element(
-				locatorMap.get(testday.toString())).click();
+var currentDateElement = function() {
+	return basePage.findElement(locatorMap.get("datePickerParent"), locatorMap
+			.get("datePickerCurrentMonth"));
+};
+
+var nextMonthElement = function() {
+	return basePage.findElement(locatorMap.get("datePickerParent"), locatorMap
+			.get("datePickerNextMonth"));
+};
+
+var checkMonth = function(month, day) {
+	currentDateElement().getText().then(function(text) {
+		var splitDate = text.split(' ');
+		var splitDatNumber = MonthMap.get(splitDate[0]);
+		if (splitDatNumber != month) {
+			clickNextMonth(month, day);
+		} else {
+			clickDay(day);
+		}
+	}, function(err) {
+		throw err;
+	});
+};
+
+var clickDay = function(day) {
+	if (day > 25) {
+		element.all(locatorMap.get(day.toString())).last().click();
+	} else {
+		element.all(locatorMap.get(day.toString())).first().click();
+	}
+
+};
+
+var clickNextMonth = function(month, day) {
+	nextMonthElement().click().then(function() {
+		checkMonth(month, day);
+	}, function(err) {
+		throw err;
+	})
+};
+
+datePicker.prototype.useDatePicker = function(daystoadd) {
+	var days = daystoadd;
+	var date = new Date();
+	date.setDate(date.getDate() + days);
+	var dateArray = date.toString().split(' ');
+	var mm = MonthMap.get(dateArray[1]).toString();
+	var dd = dateArray[2].toString().replace(/^0+/, '');
+	var yyyy = dateArray[3];
+	checkMonth(mm, dd);
+	return mm + "/" + dd + "/" + yyyy;
 };
 exports.datePicker = new datePicker();

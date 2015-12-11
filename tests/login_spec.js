@@ -10,7 +10,7 @@ var password002 = 'testpassword2';
 var uNameError = "User not found";
 var pWordError = "Incorrect password";
 var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation",
-		"labelEntry", "addTaskAssignee", "addedDays"]
+		"labelEntry" ]
 var summary = phraseGen.randomPhrase();
 var description = phraseGen.randomPhrase();
 var label1 = phraseGen.randomLabel();
@@ -18,22 +18,34 @@ var label2 = phraseGen.randomLabel();
 var label3 = phraseGen.randomLabel();
 var label4 = phraseGen.randomLabel();
 var location = phraseGen.randomLocation();
+var summaryEdit = phraseGen.randomPhrase();
+var descriptionEdit = phraseGen.randomPhrase();
+var label5 = phraseGen.randomLabel();
+var label6 = phraseGen.randomLabel();
+var label7 = phraseGen.randomLabel();
+var label8 = phraseGen.randomLabel();
+var locationEdit = phraseGen.randomLocation();
 var user1 = "Test User";
 var user2 = "Test User2";
 var days = 30;
+var daysEdit = 30;
 
 function taskData(addTaskSummary, addTaskDescription, addTasklocation,
-		labelEntry, addTaskAssignee, addedDays) {
+		labelEntry, addTaskAssignee, addedDays, displayDate) {
 	this.addTaskSummary = addTaskSummary;
 	this.addTaskDescription = addTaskDescription;
 	this.addTasklocation = addTasklocation;
 	this.labelEntry = labelEntry;
 	this.addTaskAssignee = addTaskAssignee;
 	this.addedDays = addedDays;
+	this.displayDate = displayDate;
 };
 
 var addTaskTest = new taskData(summary, description, location, [ label1,
-		label2, label3, label4 ], user1, days)
+		label2, label3, label4 ], user1, days);
+
+var editTaskTest = new taskData(summaryEdit, descriptionEdit, locationEdit, [
+		label5, label6, label7, label8 ], user2, daysEdit);
 
 describe('tasking tests', function() {
 
@@ -61,7 +73,8 @@ describe('tasking tests', function() {
 		it('simple add task', function() {
 			console.log("summary = " + summary);
 			tasking_main_page.addTask(taskEntry, addTaskTest);
-			tasking_main_page.checkTaskDetails(addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+
 		});
 	});
 
