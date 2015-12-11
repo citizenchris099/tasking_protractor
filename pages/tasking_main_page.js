@@ -27,6 +27,9 @@ locatorMap.set("addTaskDueDate", by
 locatorMap.set("addTasklabels", by.xpath(".//div[.='Labels']"));
 locatorMap.set("addTaskAssignee", by.xpath(".//div[.='Assignee']"));
 locatorMap.set("addTaskCreate", by.xpath("//button[.='Create']"));
+locatorMap.set("dueDateParent", by
+		.xpath(".//div[contains(@class,'datepicker__input-container')]"));
+locatorMap.set("dueDateClear", by.xpath(".//div[@class='close-icon']"));
 
 /**
  * locators: task queue
@@ -56,6 +59,11 @@ function sleep() {
 /**
  * elements
  */
+
+var clearDueDateElement = function(parent) {
+	return element(parent).element(locatorMap.get("dueDateParent")).element(
+			locatorMap.get("dueDateClear"));
+};
 
 var avatarElement = function() {
 	return element(locatorMap.get("loginName"));
@@ -154,12 +162,30 @@ var checkTaskDetailsLabels = function(obj) {
 	}
 };
 
-var removeTaskDetailsLabels = function(obj){
+var removeTaskDetailsLabels = function(obj) {
 	var labelsUsed = obj["labelEntry"];
 	for (var count = 0; count < labelsUsed.length; count++) {
 		taskDetailLabelElement(labelsUsed[count]).click();
 	}
 };
+
+var taskValueEntry = function(parent, value2, obj) {
+	for (var count = 0; count < value2.length; count++) {
+		if (value2[count] == "labelEntry") {
+			sleep();
+			basePage.dynamicSendKeysLoop(locatorMap.get(parent), locatorMap
+					.get("addTasklabels"), obj[value2[count]]);
+		} else if (value2[count] == "addedDays") {
+			datePickerElement(parent).click();
+			obj.displayDate = datePicker.useDatePicker(obj[value2[count]]);
+		} else {
+			sleep();
+			console.log("taskValueEntry else obj value = "+obj[value2[count]]+" and value = "+value2[count])
+			basePage.dynamicSendKeys(locatorMap.get(parent), locatorMap
+					.get(value2[count]), obj[value2[count]]);
+		}
+	}
+}
 
 /**
  * services
@@ -176,24 +202,34 @@ tasking_main_page.prototype.logOut = function() {
 
 tasking_main_page.prototype.addTask = function(value2, obj) {
 	revealAddTaskForm();
-	for (var count = 0; count < value2.length; count++) {
-		if (value2[count] == "labelEntry") {
-			sleep();
-			basePage.dynamicSendKeysLoop(locatorMap.get("addTaskParent"),
-					locatorMap.get("addTasklabels"), obj[value2[count]]);
-		} else if (value2[count] == "addedDays") {
-			datePickerElement("addTaskParent").click();
-			obj.displayDate = datePicker.useDatePicker(obj[value2[count]]);
-		} else {
-			sleep();
-			basePage.dynamicSendKeys(locatorMap.get("addTaskParent"),
-					locatorMap.get(value2[count]), obj[value2[count]]);
-		}
-	}
+	taskValueEntry("addTaskParent", value2, obj);
 	sleep();
 	createTaskElement().click();
 	checkTaskDisplayed(obj["addTaskSummary"]);
 };
+
+tasking_main_page.prototype.editTaskDetails = function(value, obj, editobj) {
+	selectTaskDisplayed(obj["addTaskSummary"]);
+	for (var count = 0; count < value.length; count++) {
+		if (value[count] == "addTasklocation"
+				|| value[count] == "addTaskAssignee") {
+			basePage
+					.dynamicBackSpace(taskDetailLocationAssignee(obj[value[count]]));
+		} else if (value[count] == "addedDays") {
+			clearDueDateElement(locatorMap.get("taskDetailsParent")).click();
+		} else if (value[count] == "labelEntry") {
+			removeTaskDetailsLabels(obj);
+		} else if (value[count] == "taskDetailsSummary"
+				|| value[count] == "taskDetailsDescription") {
+			element(locatorMap.get("taskDetailsParent")).element(
+					locatorMap.get(value[count])).clear().sendKeys("/",
+					protractor.Key.BACK_SPACE, protractor.Key.TAB);
+		}
+	}
+	taskValueEntry("taskDetailsParent", value, editobj);
+	sleep();
+	selectTaskDisplayed(editobj["addTaskSummary"]);
+}
 
 tasking_main_page.prototype.checkTaskDetails = function(value, obj) {
 	selectTaskDisplayed(obj["addTaskSummary"]);
@@ -204,12 +240,10 @@ tasking_main_page.prototype.checkTaskDetails = function(value, obj) {
 		} else if (value[count] == "addTaskDescription") {
 			basePage.textCheck(taskDetailDescriptionElement(),
 					obj["addTaskDescription"]);
-		} else if (value[count] == "addTasklocation") {
+		} else if (value[count] == "addTasklocation"
+				|| value[count] == "addTaskAssignee") {
 			basePage.displayCheck(
-					taskDetailLocationAssignee(obj["addTasklocation"]), true);
-		} else if (value[count] == "addTaskAssignee") {
-			basePage.displayCheck(
-					taskDetailLocationAssignee(obj["addTaskAssignee"]), true);
+					taskDetailLocationAssignee(obj[value[count]]), true);
 		} else if (value[count] == "addedDays") {
 			expect(datePickerElement("taskDetailsParent").getAttribute('value'))
 					.toEqual(obj["displayDate"]);

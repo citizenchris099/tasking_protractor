@@ -36,6 +36,11 @@ page.prototype.findElements = function(parent, child) {
 	return browser.driver.findElement(parent).findElements(child);
 }
 
+page.prototype.dynamicBackSpace = function(element) {
+	return browser.actions().mouseMove(element).click()
+			.sendKeys(protractor.Key.BACK_SPACE).perform();
+}
+
 page.prototype.dynamicSendKeys = function(parent, child, value) {
 	browser.actions().mouseMove(
 			browser.driver.findElement(parent).findElement(child)).click()

@@ -150,6 +150,7 @@ datePicker.prototype.useDatePicker = function(daystoadd) {
 	var days = daystoadd;
 	var date = new Date();
 	date.setDate(date.getDate() + days);
+	console.log("useDatePicker date = " + date)
 	var dateArray = date.toString().split(' ');
 	var mm = MonthMap.get(dateArray[1]).toString();
 	var dd = dateArray[2].toString().replace(/^0+/, '');
