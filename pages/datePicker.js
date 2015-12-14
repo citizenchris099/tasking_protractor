@@ -146,16 +146,30 @@ var clickNextMonth = function(month, day) {
 	})
 };
 
-datePicker.prototype.useDatePicker = function(daystoadd) {
+var testDate = function(daystoadd) {
 	var days = daystoadd;
 	var date = new Date();
 	date.setDate(date.getDate() + days);
-	console.log("useDatePicker date = " + date)
 	var dateArray = date.toString().split(' ');
 	var mm = MonthMap.get(dateArray[1]).toString();
 	var dd = dateArray[2].toString().replace(/^0+/, '');
 	var yyyy = dateArray[3];
-	checkMonth(mm, dd);
+	return [ mm, dd, yyyy ];
+}
+
+datePicker.prototype.displayDate = function(daystoadd) {
+	var date = testDate(daystoadd);
+	var mm = date[0];
+	var dd = date[1];
+	var yyyy = date[2];
 	return mm + "/" + dd + "/" + yyyy;
+}
+
+datePicker.prototype.useDatePicker = function(daystoadd) {
+	var date = testDate(daystoadd);
+	var mm = date[0];
+	var dd = date[1];
+	var yyyy = date[2];
+	checkMonth(mm, dd);
 };
 exports.datePicker = new datePicker();

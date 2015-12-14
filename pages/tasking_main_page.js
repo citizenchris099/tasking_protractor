@@ -46,6 +46,27 @@ locatorMap.set("taskDetailsParent", by.xpath("//div[@class='taskdetails']"));
 locatorMap.set("taskDetailsSummary", by.xpath(".//textarea[@name='summary']"));
 locatorMap.set("taskDetailsDescription", by
 		.xpath(".//textarea[@name='description']"));
+locatorMap
+		.set(
+				"taskDetailsStatus",
+				by
+						.xpath(".//button[contains(@class,'mod-dropdownarrow')] [@aria-expanded='false']"));
+locatorMap.set("taskDetailsStatusOption", by.xpath(".//a[@name='status']"));
+
+/**
+ * locators: comments
+ */
+locatorMap.set("taskDetailsCommentField", by
+		.xpath(".//textarea[contains(@placeholder,'Add a comment')]"));
+locatorMap.set("taskDetailsCommentButton", by
+		.xpath(".//button[contains(text(), 'Comment')]"));
+locatorMap.set("existingCommentParent", by.xpath(".//div[@class='comment']"));
+locatorMap.set("existingCommentAuthor", by
+		.css(".comment-author span:nth-child(1)"));
+locatorMap.set("existingCommentDateTime", by
+		.css(".comment-author span:nth-child(2)"));
+locatorMap
+		.set("existingCommentText", by.xpath(".//div[@class='comment-text']"));
 
 var flow = protractor.promise.controlFlow();
 function waitOne() {
@@ -60,6 +81,32 @@ function sleep() {
  * elements
  */
 
+var taskStatusMenu = function() {
+	return element(locatorMap.get("taskDetailsParent")).element(
+			locatorMap.get("taskDetailsStatus"));
+};
+
+var taskStatusOptions = function() {
+	return element(locatorMap.get("taskDetailsParent")).element.all(locatorMap
+			.get("taskDetailsStatusOption"));
+};
+
+var commentField = function() {
+	return element(locatorMap.get("taskDetailsParent")).element(
+			locatorMap.get("taskDetailsCommentField"));
+};
+
+var addCommentButton = function() {
+	return element(locatorMap.get("taskDetailsParent")).element(
+			locatorMap.get("taskDetailsCommentButton"));
+};
+
+var commentDetails = function(child) {
+	return element(locatorMap.get("taskDetailsParent")).element(
+			locatorMap.get("existingCommentParent")).element(
+			locatorMap.get(child))
+}
+
 var clearDueDateElement = function(parent) {
 	return element(parent).element(locatorMap.get("dueDateParent")).element(
 			locatorMap.get("dueDateClear"));
@@ -67,16 +114,16 @@ var clearDueDateElement = function(parent) {
 
 var avatarElement = function() {
 	return element(locatorMap.get("loginName"));
-}
+};
 
 var logOutElement = function() {
 	return element(locatorMap.get("logOut"));
-}
+};
 
 var addTaskElement = function() {
 	return basePage.findElement(locatorMap.get("showAddTaskParent"), locatorMap
 			.get("showAddTaskForm"));
-}
+};
 
 var revealAddTaskForm = function() {
 	addTaskElement().click();
@@ -128,6 +175,11 @@ var taskDetailLabelElement = function(value) {
  * actions
  */
 
+var selectTaskStatus = function(value) {
+	taskStatusMenu().click();
+	taskStatusOptions().get(value).click();
+};
+
 var clickMoreTasks = function(value, action) {
 	moreTaskElement().click().then(function() {
 		if (action == "display") {
@@ -177,19 +229,56 @@ var taskValueEntry = function(parent, value2, obj) {
 					.get("addTasklabels"), obj[value2[count]]);
 		} else if (value2[count] == "addedDays") {
 			datePickerElement(parent).click();
-			obj.displayDate = datePicker.useDatePicker(obj[value2[count]]);
+			datePicker.useDatePicker(obj[value2[count]]);
 		} else {
 			sleep();
-			console.log("taskValueEntry else obj value = "+obj[value2[count]]+" and value = "+value2[count])
 			basePage.dynamicSendKeys(locatorMap.get(parent), locatorMap
 					.get(value2[count]), obj[value2[count]]);
 		}
 	}
 }
 
+var addCommentToTask = function(value) {
+	commentField().sendKeys(value);
+	addCommentButton().click();
+};
+
+var commentInfoValidation = function(obj) {
+	var value = [ "existingCommentAuthor", "existingCommentDateTime",
+			"existingCommentText" ];
+	for (var count = 0; count < value.length; count++) {
+		(function(passedInCount) {
+			commentDetails(value[passedInCount]).getText().then(function(text) {
+				var array = text.split(",");
+				expect(array[0]).toEqual(obj[value[passedInCount]]);
+			}, function(err) {
+				throw err;
+			})
+		})(count);
+
+	}
+};
+
 /**
  * services
  */
+
+tasking_main_page.prototype.changeTaskStatus = function(value){
+	selectTaskStatus(value);
+}
+
+tasking_main_page.prototype.displayDate = function(value) {
+	return datePicker.displayDate(value);
+}
+
+tasking_main_page.prototype.addComment = function(value) {
+	addCommentToTask(value);
+}
+
+tasking_main_page.prototype.checkComment = function(obj) {
+	selectTaskDisplayed(obj["addTaskSummary"]);
+	commentInfoValidation(obj);
+}
 
 tasking_main_page.prototype.isMainPageLoaded = function() {
 	basePage.isLoaded(locatorMap.get("searchBox"), locatorMap.get("loginName"));

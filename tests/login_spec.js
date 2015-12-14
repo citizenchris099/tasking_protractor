@@ -14,7 +14,7 @@ var pWordError = "Incorrect password";
 var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation",
 		"labelEntry", "addedDays", "addTaskAssignee" ];
 var taskEdit = [ "taskDetailsSummary", "taskDetailsDescription",
-		"addTasklocation", "addTaskAssignee", "labelEntry"];
+		"addTasklocation", "addTaskAssignee", "labelEntry" ];
 var summary = phraseGen.randomPhrase();
 var description = phraseGen.randomPhrase();
 var label1 = phraseGen.randomLabel();
@@ -33,10 +33,12 @@ var user1 = "Test User";
 var user2 = "Test User2";
 var days = 30;
 var daysEdit = 10;
+var comment = phraseGen.randomPhrase();
 
 function taskData(addTaskSummary, addTaskDescription, addTasklocation,
 		labelEntry, addTaskAssignee, addedDays, displayDate,
-		taskDetailsSummary, taskDetailsDescription) {
+		taskDetailsSummary, taskDetailsDescription, existingCommentAuthor,
+		existingCommentDateTime, existingCommentText) {
 	this.addTaskSummary = addTaskSummary;
 	this.addTaskDescription = addTaskDescription;
 	this.addTasklocation = addTasklocation;
@@ -46,10 +48,14 @@ function taskData(addTaskSummary, addTaskDescription, addTasklocation,
 	this.displayDate = displayDate;
 	this.taskDetailsSummary = taskDetailsSummary;
 	this.taskDetailsDescription = taskDetailsDescription;
+	this.existingCommentAuthor = existingCommentAuthor;
+	this.existingCommentDateTime = existingCommentDateTime;
+	this.existingCommentText = existingCommentText;
 };
 
 var addTaskTest = new taskData(summary, description, location, [ label1,
-		label2, label3, label4 ], user1, days);
+		label2, label3, label4 ], user1, days, tasking_main_page
+		.displayDate(days));
 
 var editTaskValues = function(value) {
 	var editTaskTest = new taskData(addTaskTest["addTaskSummary"],
@@ -72,10 +78,15 @@ var editTaskValues = function(value) {
 		} else if (value[count] == "labelEntry") {
 			editTaskTest.labelEntry = [ label5, label6, label7, label8 ];
 		}
+		editTaskTest.existingCommentAuthor = user1;
+		editTaskTest.existingCommentDateTime = tasking_main_page.displayDate(0);
+		editTaskTest.existingCommentText = comment;
 	}
 
 	return editTaskTest;
 }
+
+var editTaskTest = editTaskValues(taskEdit);
 
 describe('tasking tests', function() {
 
@@ -101,17 +112,23 @@ describe('tasking tests', function() {
 		});
 
 		it('simple add task', function() {
-			console.log("summary = " + summary);
+			console.log("addTaskTest summary = "
+					+ addTaskTest["addTaskSummary"]);
 			tasking_main_page.addTask(taskEntry, addTaskTest);
 			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
 			tasking_main_page.logOut();
 			login_page.taskingLogin(username001, password001);
 			tasking_main_page.editTaskDetails(taskEdit, addTaskTest,
-					editTaskValues(taskEdit));
+					editTaskTest);
 			tasking_main_page.logOut();
 			login_page.taskingLogin(username001, password001);
-			tasking_main_page.checkTaskDetails(taskEntry,
-					editTaskValues(taskEdit));
+			tasking_main_page.checkTaskDetails(taskEntry, editTaskTest);
+			tasking_main_page.checkTaskDetails(taskEdit, editTaskTest);
+			tasking_main_page.addComment(comment);
+			console.log("editTaskTest summary = "
+					+ editTaskTest["addTaskSummary"]);
+			tasking_main_page.checkComment(editTaskTest);
+
 		});
 	});
 
