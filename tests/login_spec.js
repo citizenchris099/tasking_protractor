@@ -38,7 +38,7 @@ var comment = phraseGen.randomPhrase();
 function taskData(addTaskSummary, addTaskDescription, addTasklocation,
 		labelEntry, addTaskAssignee, addedDays, displayDate,
 		taskDetailsSummary, taskDetailsDescription, existingCommentAuthor,
-		existingCommentDateTime, existingCommentText) {
+		existingCommentDateTime, existingCommentText, taskStatus, flag) {
 	this.addTaskSummary = addTaskSummary;
 	this.addTaskDescription = addTaskDescription;
 	this.addTasklocation = addTasklocation;
@@ -51,17 +51,23 @@ function taskData(addTaskSummary, addTaskDescription, addTasklocation,
 	this.existingCommentAuthor = existingCommentAuthor;
 	this.existingCommentDateTime = existingCommentDateTime;
 	this.existingCommentText = existingCommentText;
+	this.taskStatus = taskStatus;
+	this.flag = flag;
 };
 
-var addTaskTest = new taskData(summary, description, location, [ label1,
-		label2, label3, label4 ], user1, days, tasking_main_page
-		.displayDate(days));
+var addTaskData = function() {
+	return new taskData(phraseGen.randomPhrase(), phraseGen.randomPhrase(),
+			phraseGen.randomLocation(), [ phraseGen.randomLabel(),
+					phraseGen.randomLabel(), phraseGen.randomLabel(),
+					phraseGen.randomLabel() ], user1, days, tasking_main_page
+					.displayDate(days));
+}
 
-var editTaskValues = function(value) {
-	var editTaskTest = new taskData(addTaskTest["addTaskSummary"],
-			addTaskTest["addTaskDescription"], addTaskTest["addTasklocation"],
-			addTaskTest["labelEntry"], addTaskTest["addTaskAssignee"],
-			addTaskTest["addedDays"], addTaskTest["displayDate"]);
+var editTaskValues = function(value, status, obj) {
+	var editTaskTest = new taskData(obj["addTaskSummary"],
+			obj["addTaskDescription"], obj["addTasklocation"],
+			obj["labelEntry"], obj["addTaskAssignee"], obj["addedDays"],
+			obj["displayDate"]);
 	for (var count = 0; count < value.length; count++) {
 		if (value[count] == "taskDetailsSummary") {
 			editTaskTest.taskDetailsSummary = summaryEdit;
@@ -78,15 +84,23 @@ var editTaskValues = function(value) {
 		} else if (value[count] == "labelEntry") {
 			editTaskTest.labelEntry = [ label5, label6, label7, label8 ];
 		}
-		editTaskTest.existingCommentAuthor = user1;
-		editTaskTest.existingCommentDateTime = tasking_main_page.displayDate(0);
-		editTaskTest.existingCommentText = comment;
+	}
+	editTaskTest.existingCommentAuthor = user1;
+	editTaskTest.existingCommentDateTime = tasking_main_page.displayDate(0);
+	editTaskTest.existingCommentText = comment;
+	editTaskTest.taskStatus = status;
+	if (editTaskTest["taskStatus"] == "blocked") {
+		editTaskTest.flag = "taskBlocked"
+	} else if (editTaskTest["taskStatus"] == "complete") {
+		editTaskTest.flag = "taskComplete"
+	} else if (editTaskTest["taskStatus"] == "canceled") {
+		editTaskTest.flag = "taskCanceled"
+	} else {
+		console.log("editTaskValues made it to else")
 	}
 
 	return editTaskTest;
 }
-
-var editTaskTest = editTaskValues(taskEdit);
 
 describe('tasking tests', function() {
 
@@ -111,9 +125,61 @@ describe('tasking tests', function() {
 			login_page.isLoginPageLoaded();
 		});
 
-		it('simple add task', function() {
+		it('search task :  summary', function() {
+			var addTaskTest = addTaskData();
 			console.log("addTaskTest summary = "
 					+ addTaskTest["addTaskSummary"]);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.useSearchFilter(addTaskTest, addTaskTest["addTaskSummary"]);
+		});
+		xit('simple add task', function() {
+			var addTaskTest = addTaskData();
+			console.log("addTaskTest summary = "
+					+ addTaskTest["addTaskSummary"]);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+		});
+		xit('block task', function() {
+			var addTaskTest = addTaskData();
+			var blockTaskTest = editTaskValues([ "" ], "blocked", addTaskTest);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.blockTask(addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskNotInQueue(blockTaskTest, "Closed");
+			tasking_main_page.checkTaskInQueue(blockTaskTest, "Open");
+			tasking_main_page.checkTaskDetails(taskEntry, blockTaskTest);
+			tasking_main_page.checkTaskDetailsBlocked(blockTaskTest, true);
+			tasking_main_page.checkTaskFlag(blockTaskTest, true);
+
+		});
+		xit('cancel task', function() {
+			var addTaskTest = addTaskData();
+			var cancelTaskTest = editTaskValues([ "" ], "canceled", addTaskTest);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.cancelTask(addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskNotInQueue(cancelTaskTest, "Open");
+			tasking_main_page.checkTaskInQueue(cancelTaskTest, "Closed");
+			tasking_main_page.checkTaskDetails(taskEntry, cancelTaskTest);
+			tasking_main_page.checkTaskDetailsCanceled(cancelTaskTest, true);
+			tasking_main_page.checkTaskFlag(cancelTaskTest, true);
+
+		});
+		xit('edit task details', function() {
+			var addTaskTest = addTaskData();
+			var editTaskTest = editTaskValues(taskEdit, "not started", addTaskTest);
 			tasking_main_page.addTask(taskEntry, addTaskTest);
 			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
 			tasking_main_page.logOut();
@@ -124,11 +190,59 @@ describe('tasking tests', function() {
 			login_page.taskingLogin(username001, password001);
 			tasking_main_page.checkTaskDetails(taskEntry, editTaskTest);
 			tasking_main_page.checkTaskDetails(taskEdit, editTaskTest);
+		});
+		xit('add comment', function() {
+			var addTaskTest = addTaskData();
+			var commentTaskTest = editTaskValues([ "" ], "not started",
+					addTaskTest);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
 			tasking_main_page.addComment(comment);
-			console.log("editTaskTest summary = "
-					+ editTaskTest["addTaskSummary"]);
-			tasking_main_page.checkComment(editTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkComment(commentTaskTest);
+		});
+		xit('change task status in progress', function() {
+			var addTaskTest = addTaskData();
+			var changeStatusTaskTest = editTaskValues([ "" ], "in progress",
+					addTaskTest);
+			console.log("addTaskTest summary = "
+					+ addTaskTest["addTaskSummary"]
+					+ " changeStatusTaskTest summary = "
+					+ changeStatusTaskTest["addTaskSummary"]);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.changeTaskStatus(changeStatusTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskNotInQueue(changeStatusTaskTest,
+					"Closed");
+			tasking_main_page.checkTaskInQueue(changeStatusTaskTest, "Open");
+			tasking_main_page.checkTaskStatus(changeStatusTaskTest);
 
+		});
+		xit('change task status complete', function() {
+			var addTaskTest = addTaskData();
+			var completeTaskTest = editTaskValues([ "" ], "complete",
+					addTaskTest);
+			console.log("addTaskTest summary = "
+					+ addTaskTest["addTaskSummary"]
+					+ " completeTaskTest summary = "
+					+ completeTaskTest["addTaskSummary"]);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.changeTaskStatus(completeTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskNotInQueue(completeTaskTest, "Open");
+			tasking_main_page.checkTaskInQueue(completeTaskTest, "Closed");
+			tasking_main_page.checkTaskFlag(completeTaskTest);
 		});
 	});
 
