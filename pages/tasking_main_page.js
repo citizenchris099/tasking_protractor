@@ -9,9 +9,21 @@ statusMap.set("on hold", 2);
 statusMap.set("complete", 3);
 
 var locatorMap = new Map();
-locatorMap.set("searchBox", by.xpath(".//input[@placeholder='Search']"));
 locatorMap.set("loginName", by.xpath("//span[@class='avatar']"));
 locatorMap.set("logOut", by.xpath("//span[.='Log Out']"));
+
+/**
+ * locators: filters
+ */
+locatorMap.set("searchBox", by.xpath(".//input[@placeholder='Search']"));
+locatorMap.set("quickFiltersParent", by.xpath("//ul[@class='quickfilters']"));
+locatorMap
+		.set(
+				"quickFilterMenu",
+				by
+						.xpath(".//a[@class='quickfilter-item-link'] [contains(text(), 'Quick Filters')]"));
+locatorMap.set("quickFilterMenuChoices", by
+		.xpath(".//div[contains(@class,'quickfilter-item-choiceset')]"));
 
 /**
  * locators: add task
@@ -105,7 +117,7 @@ function sleep() {
  * elements
  */
 
-var searchFilter = function(){
+var searchFilter = function() {
 	return element(locatorMap.get("searchBox"));
 }
 
@@ -140,6 +152,18 @@ var taskQueueGroup = function(value) {
 
 var activeTaskQueueGroup = function(value) {
 	return element(locatorMap.get("taskListGroup")).element(
+			by.xpath(".//a[contains(text(), '" + value
+					+ "')] [contains(@class,'is-active')]"));
+}
+
+var allOrMyTaskFilter = function(value) {
+	return element(locatorMap.get("quickFiltersParent")).element(
+			by.xpath(".//a[contains(text(), '" + value
+					+ "')] [contains(@class,'quickfilter-item-link')]"));
+}
+
+var allOrMyTaskFilterActive = function(value) {
+	return element(locatorMap.get("quickFiltersParent")).element(
 			by.xpath(".//a[contains(text(), '" + value
 					+ "')] [contains(@class,'is-active')]"));
 }
@@ -255,14 +279,31 @@ var blockOrCancelOption = function(value) {
 					+ "')] [contains(@class,'dropdown-item')]"));
 };
 
+var quickFilterskMenu = function() {
+	return element(locatorMap.get("quickFiltersParent")).element(
+			locatorMap.get("quickFilterMenu"));
+};
+
+var quickFilterOption = function(value) {
+	return element(locatorMap.get("quickFiltersParent"))
+			.element(locatorMap.get("quickFilterMenuChoices"))
+			.element(
+					by
+							.xpath(".//div[contains(text(), '"
+									+ value
+									+ "')] [contains(@class,'quickfilter-item-choiceset-link')]"));
+};
+
 /**
  * actions
  */
 
-var checkTaskDetailsBlockedCanceled = function(value1, value2, boolean){
-	expect(taskDetailsBlockedCanceledHeader(value1).isDisplayed()).toBe(boolean);
+var checkTaskDetailsBlockedCanceled = function(value1, value2, boolean) {
+	expect(taskDetailsBlockedCanceledHeader(value1).isDisplayed())
+			.toBe(boolean);
 	expect(taskDetailsBlockedCanceledAlert().isDisplayed()).toBe(boolean);
-	expect(taskDetailsBlockedCanceledButton(value2).isDisplayed()).toBe(boolean);
+	expect(taskDetailsBlockedCanceledButton(value2).isDisplayed())
+			.toBe(boolean);
 }
 
 var checkTaskFlag = function(value, boolean) {
@@ -272,6 +313,14 @@ var checkTaskFlag = function(value, boolean) {
 var selectTaskQueueGroup = function(value) {
 	taskQueueGroup(value).click().then(function() {
 		expect(activeTaskQueueGroup(value).isDisplayed()).toBe(true);
+	}, function(err) {
+		throw err;
+	})
+}
+
+var selectAllOrMyFilter = function(value) {
+	allOrMyTaskFilter(value).click().then(function() {
+		expect(allOrMyTaskFilterActive(value).isDisplayed()).toBe(true);
 	}, function(err) {
 		throw err;
 	})
@@ -301,6 +350,7 @@ var clickMoreTasks = function(value, boolean) {
 var checkTaskDisplayed = function(value, boolean) {
 	taskInQueue(value).isDisplayed().then(function(display) {
 		expect(display).toBe(boolean);
+		sleep();
 		taskInQueue(value).click();
 	}, function(err) {
 		clickMoreTasks(value, boolean);
@@ -338,9 +388,9 @@ var taskValueEntry = function(parent, value2, obj) {
 	}
 }
 
-var useSearchFilter = function(value){
-	browser.actions().mouseMove(locatorMap.get("searchBox")).click()
-			.sendKeys(value, protractor.Key.ENTER).perform();
+var useSearchFilter = function(value) {
+	browser.actions().mouseMove(searchFilter()).click().sendKeys(value,
+			protractor.Key.ENTER).perform();
 }
 
 var addCommentToTask = function(value) {
@@ -378,44 +428,61 @@ var blockOrCancelTask = function(choice) {
 	allerts("accept");
 };
 
+var selectQuickFilter = function(value) {
+	quickFilterskMenu().click();
+	quickFilterOption(value).click();
+};
+
 /**
  * services
  */
 
-tasking_main_page.prototype.useSearchFilter = function(obj, value){
+tasking_main_page.prototype.tasksICreatedFilter = function() {
+	selectQuickFilter("Tasks I Created");
+};
+
+tasking_main_page.prototype.allTasksFilter = function() {
+	selectAllOrMyFilter("All Tasks");
+};
+
+tasking_main_page.prototype.myTasksFilter = function() {
+	selectAllOrMyFilter("My Tasks");
+};
+
+tasking_main_page.prototype.useSearchFilter = function(obj, value) {
 	useSearchFilter(value);
 	checkTaskDisplayed(obj["addTaskSummary"], true);
-}
+};
 
-tasking_main_page.prototype.checkTaskDetailsBlocked = function(obj, boolean){
+tasking_main_page.prototype.checkTaskDetailsBlocked = function(obj, boolean) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	checkTaskDetailsBlockedCanceled("Task Blocked", "Unblock", boolean);
-}
+};
 
-tasking_main_page.prototype.checkTaskDetailsCanceled = function(obj, boolean){
+tasking_main_page.prototype.checkTaskDetailsCanceled = function(obj, boolean) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	checkTaskDetailsBlockedCanceled("Task Canceled", "Reopen", boolean);
-}
+};
 
 tasking_main_page.prototype.blockTask = function(obj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	blockOrCancelTask("Block Task");
-}
+};
 
 tasking_main_page.prototype.cancelTask = function(obj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	blockOrCancelTask("Cancel Task");
-}
+};
 
 tasking_main_page.prototype.checkTaskNotInQueue = function(obj, value) {
 	selectTaskQueueGroup(value)
 	checkTaskDisplayed(obj["addTaskSummary"], false);
-}
+};
 
 tasking_main_page.prototype.checkTaskInQueue = function(obj, value) {
 	selectTaskQueueGroup(value)
 	checkTaskDisplayed(obj["addTaskSummary"], true);
-}
+};
 
 tasking_main_page.prototype.changeTaskStatus = function(obj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
