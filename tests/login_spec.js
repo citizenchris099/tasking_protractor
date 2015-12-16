@@ -11,10 +11,8 @@ var username003 = 'wr';
 var password003 = 'wr';
 var uNameError = "User not found";
 var pWordError = "Incorrect password";
-var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation",
-		"labelEntry", "addedDays", "addTaskAssignee" ];
-var taskEdit = [ "taskDetailsSummary", "taskDetailsDescription",
-		"addTasklocation", "addTaskAssignee", "labelEntry" ];
+var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation", "labelEntry", "addedDays", "addTaskAssignee" ];
+var taskEdit = [ "taskDetailsSummary", "taskDetailsDescription", "addTasklocation", "addTaskAssignee", "labelEntry" ];
 var summary = phraseGen.randomPhrase();
 var description = phraseGen.randomPhrase();
 var label1 = phraseGen.randomLabel();
@@ -35,10 +33,9 @@ var days = 30;
 var daysEdit = 10;
 var comment = phraseGen.randomPhrase();
 
-function taskData(addTaskSummary, addTaskDescription, addTasklocation,
-		labelEntry, addTaskAssignee, addedDays, displayDate,
-		taskDetailsSummary, taskDetailsDescription, existingCommentAuthor,
-		existingCommentDateTime, existingCommentText, taskStatus, flag) {
+function taskData(addTaskSummary, addTaskDescription, addTasklocation, labelEntry, addTaskAssignee, addedDays, displayDate,
+		taskDetailsSummary, taskDetailsDescription, existingCommentAuthor, existingCommentDateTime, existingCommentText,
+		taskStatus, flag) {
 	this.addTaskSummary = addTaskSummary;
 	this.addTaskDescription = addTaskDescription;
 	this.addTasklocation = addTasklocation;
@@ -56,18 +53,14 @@ function taskData(addTaskSummary, addTaskDescription, addTasklocation,
 };
 
 var addTaskData = function() {
-	return new taskData(phraseGen.randomPhrase(), phraseGen.randomPhrase(),
-			phraseGen.randomLocation(), [ phraseGen.randomLabel(),
-					phraseGen.randomLabel(), phraseGen.randomLabel(),
-					phraseGen.randomLabel() ], user1, days, tasking_main_page
-					.displayDate(days));
+	return new taskData(phraseGen.randomPhrase(), phraseGen.randomPhrase(), phraseGen.randomLocation(), [
+			phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel() ], user1,
+			days, tasking_main_page.displayDate(days));
 }
 
 var editTaskValues = function(value, status, obj) {
-	var editTaskTest = new taskData(obj["addTaskSummary"],
-			obj["addTaskDescription"], obj["addTasklocation"],
-			obj["labelEntry"], obj["addTaskAssignee"], obj["addedDays"],
-			obj["displayDate"]);
+	var editTaskTest = new taskData(obj["addTaskSummary"], obj["addTaskDescription"], obj["addTasklocation"],
+			obj["labelEntry"], obj["addTaskAssignee"], obj["addedDays"], obj["displayDate"]);
 	for (var count = 0; count < value.length; count++) {
 		if (value[count] == "taskDetailsSummary") {
 			editTaskTest.taskDetailsSummary = summaryEdit;
@@ -101,318 +94,359 @@ var editTaskValues = function(value, status, obj) {
 	return editTaskTest;
 }
 
-describe(
-		'tasking tests',
-		function() {
+describe('tasking tests', function() {
 
-			beforeEach(function() {
-				browser.ignoreSynchronization = true;
-				browser.driver.get(localTasking);
-				browser.manage().timeouts().implicitlyWait(5000);
-				browser.driver.manage().window().maximize();
-			});
-			afterEach(function() {
-			});
+	beforeEach(function() {
+		browser.ignoreSynchronization = true;
+		browser.driver.get(localTasking);
+		browser.manage().timeouts().implicitlyWait(5000);
+		browser.driver.manage().window().maximize();
+	});
+	afterEach(function() {
+	});
 
-			describe(
-					'add task tests',
-					function() {
-						beforeEach(function() {
-							login_page.isLoginPageLoaded();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.isMainPageLoaded();
-						});
+	describe('add task tests', function() {
+		beforeEach(function() {
+			login_page.isLoginPageLoaded();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.isMainPageLoaded();
+		});
 
-						afterEach(function() {
-							tasking_main_page.logOut();
-							login_page.isLoginPageLoaded();
-						});
-						xit('simple add task', function() {
-							var addTaskTest = addTaskData();
-							console.log("addTaskTest summary = "
-									+ addTaskTest["addTaskSummary"]);
-							tasking_main_page.addTask(taskEntry, addTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.checkTaskDetails(taskEntry,
-									addTaskTest);
-						});
+		afterEach(function() {
+			tasking_main_page.logOut();
+			login_page.isLoginPageLoaded();
+		});
+		xit('simple add task', function() {
+			var addTaskTest = addTaskData();
+			console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+		});
 
-						xit('block task', function() {
-							var addTaskTest = addTaskData();
-							var blockTaskTest = editTaskValues([ "" ],
-									"blocked", addTaskTest);
-							tasking_main_page.addTask(taskEntry, addTaskTest);
-							tasking_main_page.checkTaskDetails(taskEntry,
-									addTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.blockTask(addTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.checkTaskNotInQueue(
-									blockTaskTest, "Closed");
-							tasking_main_page.checkTaskInQueue(blockTaskTest,
-									"Open");
-							tasking_main_page.checkTaskDetails(taskEntry,
-									blockTaskTest);
-							tasking_main_page.checkTaskDetailsBlocked(
-									blockTaskTest, true);
-							tasking_main_page
-									.checkTaskFlag(blockTaskTest, true);
-
-						});
-						xit('cancel task', function() {
-							var addTaskTest = addTaskData();
-							var cancelTaskTest = editTaskValues([ "" ],
-									"canceled", addTaskTest);
-							tasking_main_page.addTask(taskEntry, addTaskTest);
-							tasking_main_page.checkTaskDetails(taskEntry,
-									addTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.cancelTask(addTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.checkTaskNotInQueue(
-									cancelTaskTest, "Open");
-							tasking_main_page.checkTaskInQueue(cancelTaskTest,
-									"Closed");
-							tasking_main_page.checkTaskDetails(taskEntry,
-									cancelTaskTest);
-							tasking_main_page.checkTaskDetailsCanceled(
-									cancelTaskTest, true);
-							tasking_main_page.checkTaskFlag(cancelTaskTest,
-									true);
-
-						});
-						xit('edit task details', function() {
-							var addTaskTest = addTaskData();
-							var editTaskTest = editTaskValues(taskEdit,
-									"not started", addTaskTest);
-							tasking_main_page.addTask(taskEntry, addTaskTest);
-							tasking_main_page.checkTaskDetails(taskEntry,
-									addTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.editTaskDetails(taskEdit,
-									addTaskTest, editTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.checkTaskDetails(taskEntry,
-									editTaskTest);
-							tasking_main_page.checkTaskDetails(taskEdit,
-									editTaskTest);
-						});
-						xit('add comment', function() {
-							var addTaskTest = addTaskData();
-							var commentTaskTest = editTaskValues([ "" ],
-									"not started", addTaskTest);
-							tasking_main_page.addTask(taskEntry, addTaskTest);
-							tasking_main_page.checkTaskDetails(taskEntry,
-									addTaskTest);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.addComment(comment);
-							tasking_main_page.logOut();
-							login_page.taskingLogin(username001, password001);
-							tasking_main_page.checkComment(commentTaskTest);
-						});
-						describe(
-								'add task status tests',
-								function() {
-									xit(
-											'change task status in progress',
-											function() {
-												var addTaskTest = addTaskData();
-												var changeStatusTaskTest = editTaskValues(
-														[ "" ], "in progress",
-														addTaskTest);
-												console
-														.log("addTaskTest summary = "
-																+ addTaskTest["addTaskSummary"]
-																+ " changeStatusTaskTest summary = "
-																+ changeStatusTaskTest["addTaskSummary"]);
-												tasking_main_page.addTask(
-														taskEntry, addTaskTest);
-												tasking_main_page
-														.checkTaskDetails(
-																taskEntry,
-																addTaskTest);
-												tasking_main_page.logOut();
-												login_page.taskingLogin(
-														username001,
-														password001);
-												tasking_main_page
-														.changeTaskStatus(changeStatusTaskTest);
-												tasking_main_page.logOut();
-												login_page.taskingLogin(
-														username001,
-														password001);
-												tasking_main_page
-														.checkTaskNotInQueue(
-																changeStatusTaskTest,
-																"Closed");
-												tasking_main_page
-														.checkTaskInQueue(
-																changeStatusTaskTest,
-																"Open");
-												tasking_main_page
-														.checkTaskStatus(changeStatusTaskTest);
-
-											});
-									xit(
-											'change task status complete',
-											function() {
-												var addTaskTest = addTaskData();
-												var completeTaskTest = editTaskValues(
-														[ "" ], "complete",
-														addTaskTest);
-												console
-														.log("addTaskTest summary = "
-																+ addTaskTest["addTaskSummary"]
-																+ " completeTaskTest summary = "
-																+ completeTaskTest["addTaskSummary"]);
-												tasking_main_page.addTask(
-														taskEntry, addTaskTest);
-												tasking_main_page
-														.checkTaskDetails(
-																taskEntry,
-																addTaskTest);
-												tasking_main_page.logOut();
-												login_page.taskingLogin(
-														username001,
-														password001);
-												tasking_main_page
-														.changeTaskStatus(completeTaskTest);
-												tasking_main_page.logOut();
-												login_page.taskingLogin(
-														username001,
-														password001);
-												tasking_main_page
-														.checkTaskNotInQueue(
-																completeTaskTest,
-																"Open");
-												tasking_main_page
-														.checkTaskInQueue(
-																completeTaskTest,
-																"Closed");
-												tasking_main_page
-														.checkTaskFlag(
-																completeTaskTest,
-																true);
-											});
-								});
-						describe('add task filter tests', function() {
-							xit('search task :  summary', function() {
-								var addTaskTest = addTaskData();
-								console.log("addTaskTest summary = "
-										+ addTaskTest["addTaskSummary"]);
-								tasking_main_page.addTask(taskEntry,
-										addTaskTest);
-								tasking_main_page.logOut();
-								login_page.taskingLogin(username001,
-										password001);
-								tasking_main_page.useSearchFilter(addTaskTest,
-										addTaskTest["addTaskSummary"]);
-								tasking_main_page.checkTaskDetails(taskEntry,
-										addTaskTest);
-							});
-							it('my tasks filter happy', function() {
-								var addTaskTest = addTaskData();
-								console.log("addTaskTest summary = "
-										+ addTaskTest["addTaskSummary"]);
-								tasking_main_page.addTask(taskEntry,
-										addTaskTest);
-								tasking_main_page.logOut();
-								login_page.taskingLogin(username001,
-										password001);
-								tasking_main_page.myTasksFilter();
-								tasking_main_page.checkTaskInQueue(addTaskTest,
-										"Open");
-								tasking_main_page.checkTaskDetails(taskEntry,
-										addTaskTest);
-							});
-							xit('my tasks filter', function() {
-								var addTaskTest = addTaskData();
-								console.log("addTaskTest summary = "
-										+ addTaskTest["addTaskSummary"]);
-								tasking_main_page.addTask(taskEntry,
-										addTaskTest);
-								tasking_main_page.logOut();
-								login_page.taskingLogin(username002,
-										password002);
-								tasking_main_page.myTasksFilter();
-								tasking_main_page.checkTaskNotInQueue(
-										addTaskTest, "Open");
-							});
-							xit('all tasks filter', function() {
-								var addTaskTest = addTaskData();
-								console.log("addTaskTest summary = "
-										+ addTaskTest["addTaskSummary"]);
-								tasking_main_page.addTask(taskEntry,
-										addTaskTest);
-								tasking_main_page.logOut();
-								login_page.taskingLogin(username002,
-										password002);
-								tasking_main_page.myTasksFilter();
-								tasking_main_page.checkTaskNotInQueue(
-										addTaskTest, "Open");
-								tasking_main_page.allTasksFilter();
-								tasking_main_page.checkTaskInQueue(addTaskTest,
-										"Open");
-								tasking_main_page.checkTaskDetails(taskEntry,
-										addTaskTest);
-							});
-							xit('tasks I created filter happy', function() {
-								var addTaskTest = addTaskData();
-								console.log("addTaskTest summary = "
-										+ addTaskTest["addTaskSummary"]);
-								tasking_main_page.addTask(taskEntry,
-										addTaskTest);
-								tasking_main_page.tasksICreatedFilter();
-								tasking_main_page.checkTaskInQueue(addTaskTest,
-										"Open");
-								tasking_main_page.checkTaskDetails(taskEntry,
-										addTaskTest);
-							});
-							xit('tasks I created filter', function() {
-								var addTaskTest = addTaskData();
-								console.log("addTaskTest summary = "
-										+ addTaskTest["addTaskSummary"]);
-								tasking_main_page.addTask(taskEntry,
-										addTaskTest);
-								tasking_main_page.logOut();
-								login_page.taskingLogin(username002,
-										password002);
-								tasking_main_page.tasksICreatedFilter();
-								tasking_main_page.checkTaskNotInQueue(
-										addTaskTest, "Open");
-							});
-
-						});
-
-					});
-
-			describe('failed login tests', function() {
-				beforeEach(function() {
-					login_page.isLoginPageLoaded();
-				});
-
-				afterEach(function() {
-					login_page.isLoginPageLoaded();
-				});
-
-				xit('bad username test', function() {
-					login_page.taskingLoginFail("wrong", password001,
-							uNameError);
-				});
-
-				xit('bad password test',
-						function() {
-							login_page.taskingLoginFail(username001, "bad",
-									pWordError);
-						});
-			});
+		xit('block task', function() {
+			var addTaskTest = addTaskData();
+			var blockTaskTest = editTaskValues([ "" ], "blocked", addTaskTest);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.blockTask(addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskNotInQueue(blockTaskTest, "Closed");
+			tasking_main_page.checkTaskInQueue(blockTaskTest, "Open");
+			tasking_main_page.checkTaskDetails(taskEntry, blockTaskTest);
+			tasking_main_page.checkTaskDetailsBlocked(blockTaskTest, true);
+			tasking_main_page.checkTaskFlag(blockTaskTest, true);
 
 		});
+		xit('cancel task', function() {
+			var addTaskTest = addTaskData();
+			var cancelTaskTest = editTaskValues([ "" ], "canceled", addTaskTest);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.cancelTask(addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskNotInQueue(cancelTaskTest, "Open");
+			tasking_main_page.checkTaskInQueue(cancelTaskTest, "Closed");
+			tasking_main_page.checkTaskDetails(taskEntry, cancelTaskTest);
+			tasking_main_page.checkTaskDetailsCanceled(cancelTaskTest, true);
+			tasking_main_page.checkTaskFlag(cancelTaskTest, true);
+
+		});
+		xit('edit task details', function() {
+			var addTaskTest = addTaskData();
+			var editTaskTest = editTaskValues(taskEdit, "not started", addTaskTest);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.editTaskDetails(taskEdit, addTaskTest, editTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkTaskDetails(taskEntry, editTaskTest);
+			tasking_main_page.checkTaskDetails(taskEdit, editTaskTest);
+		});
+		xit('add comment', function() {
+			var addTaskTest = addTaskData();
+			var commentTaskTest = editTaskValues([ "" ], "not started", addTaskTest);
+			tasking_main_page.addTask(taskEntry, addTaskTest);
+			tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.addComment(comment);
+			tasking_main_page.logOut();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.checkComment(commentTaskTest);
+		});
+		describe('add task status tests', function() {
+			xit('change task status in progress', function() {
+				var addTaskTest = addTaskData();
+				var changeStatusTaskTest = editTaskValues([ "" ], "in progress", addTaskTest);
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"] + " changeStatusTaskTest summary = "
+						+ changeStatusTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username001, password001);
+				tasking_main_page.changeTaskStatus(changeStatusTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username001, password001);
+				tasking_main_page.checkTaskNotInQueue(changeStatusTaskTest, "Closed");
+				tasking_main_page.checkTaskInQueue(changeStatusTaskTest, "Open");
+				tasking_main_page.checkTaskStatus(changeStatusTaskTest);
+
+			});
+			xit('change task status complete', function() {
+				var addTaskTest = addTaskData();
+				var completeTaskTest = editTaskValues([ "" ], "complete", addTaskTest);
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"] + " completeTaskTest summary = "
+						+ completeTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username001, password001);
+				tasking_main_page.changeTaskStatus(completeTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username001, password001);
+				tasking_main_page.checkTaskNotInQueue(completeTaskTest, "Open");
+				tasking_main_page.checkTaskInQueue(completeTaskTest, "Closed");
+				tasking_main_page.checkTaskFlag(completeTaskTest, true);
+			});
+		});
+		describe('add task filter tests', function() {
+			xit('search task :  summary', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username001, password001);
+				tasking_main_page.useSearchFilter(addTaskTest, addTaskTest["addTaskSummary"]);
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			});
+			xit('my tasks quick filter happy', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username001, password001);
+				tasking_main_page.myTasksFilter();
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			});
+			xit('my tasks quick filter', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username002, password002);
+				tasking_main_page.myTasksFilter();
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+			});
+			xit('all tasks quick filter', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username002, password002);
+				tasking_main_page.myTasksFilter();
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+				tasking_main_page.allTasksFilter();
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			});
+			xit('tasks I created quick filter happy', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.tasksICreatedQuickFilter();
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+			});
+			xit('tasks I created quick filter', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username002, password002);
+				tasking_main_page.tasksICreatedQuickFilter();
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+			});
+			xit('blocked tasks quick filter happy', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.blockTask(addTaskTest);
+				tasking_main_page.blockedTasksQuickFilter();
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('blocked tasks quick filter', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.blockedTasksQuickFilter();
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+			});
+			xit('starred tasks quick filter happy', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.starTaskInQueue(addTaskTest);
+				tasking_main_page.tasksIStarredQuickFilter();
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('starred tasks quick filter', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.tasksIStarredQuickFilter();
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+			});
+			xit('starred tasks quick filter', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.starTaskInQueue(addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username002, password002);
+				tasking_main_page.tasksIStarredQuickFilter();
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+			});
+			xit('All filters Location happy', function() {
+				var addTaskTest = addTaskData();
+				var allFilterMenus = [ "allFilterLocation" ];
+				var allFilterSelections = [ addTaskTest["addTasklocation"] ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('All filters Due happy', function() {
+				var addTaskTest = addTaskData();
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.useAllFilterDueDate(days, days);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('All filters Labels happy:  one label', function() {
+				var addTaskTest = addTaskData();
+				var labels = addTaskTest["labelEntry"];
+				var allFilterMenus = [ "allFilterLabels" ];
+				var allFilterSelections = [ labels[0] ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('All filters Labels happy:  multiple labels', function() {
+				var addTaskTest = addTaskData();
+				var labels = addTaskTest["labelEntry"];
+				var allFilterMenus = [ "allFilterLabels", "allFilterLabels", "allFilterLabels", "allFilterLabels" ];
+				var allFilterSelections = [ labels[0], labels[1], labels[2], labels[3] ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('All filters Assignee happy', function() {
+				var addTaskTest = addTaskData();
+				var allFilterMenus = [ "allFilterAssignee" ];
+				var allFilterSelections = [ "testuid1" ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('All filters status happy :  in progress', function() {
+				var addTaskTest = addTaskData();
+				var changeStatusTaskTest = editTaskValues([ "" ], "in progress", addTaskTest);
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"] + " changeStatusTaskTest summary = "
+						+ changeStatusTaskTest["addTaskSummary"]);
+				var allFilterMenus = [ "allFilterStatus" ];
+				var allFilterSelections = [ "In Progress" ];
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+				tasking_main_page.changeTaskStatus(changeStatusTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('All filters status :  in progress', function() {
+				var addTaskTest = addTaskData();
+				var changeStatusTaskTest = editTaskValues([ "" ], "in progress", addTaskTest);
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"] + " changeStatusTaskTest summary = "
+						+ changeStatusTaskTest["addTaskSummary"]);
+				var allFilterMenus = [ "allFilterStatus" ];
+				var allFilterSelections = [ "Not Started" ];
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
+				tasking_main_page.changeTaskStatus(changeStatusTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+			});
+			xit('All filters more options starred happy', function() {
+				var addTaskTest = addTaskData();
+				var allFilterMenus = [ "allFilterMoreO" ];
+				var allFilterSelections = [ "Tasks I Starred" ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.starTaskInQueue(addTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			xit('All filters more options blocked happy', function() {
+				var addTaskTest = addTaskData();
+				var allFilterMenus = [ "allFilterMoreO" ];
+				var allFilterSelections = [ "Blocked Tasks" ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.blockTask(addTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			it('All filters more options i created happy', function() {
+				var addTaskTest = addTaskData();
+				var allFilterMenus = [ "allFilterMoreO" ];
+				var allFilterSelections = [ "Tasks I Created" ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskInQueue(addTaskTest, "Open");
+			});
+			it('All filters more options i created', function() {
+				var addTaskTest = addTaskData();
+				var allFilterMenus = [ "allFilterMoreO" ];
+				var allFilterSelections = [ "Tasks I Created" ];
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
+				tasking_main_page.addTask(taskEntry, addTaskTest);
+				tasking_main_page.logOut();
+				login_page.taskingLogin(username002, password002);
+				tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+				tasking_main_page.checkTaskNotInQueue(addTaskTest, "Open");
+			});
+		});
+	});
+
+	describe('failed login tests', function() {
+		beforeEach(function() {
+			login_page.isLoginPageLoaded();
+		});
+
+		afterEach(function() {
+			login_page.isLoginPageLoaded();
+		});
+
+		xit('bad username test', function() {
+			login_page.taskingLoginFail("wrong", password001, uNameError);
+		});
+
+		xit('bad password test', function() {
+			login_page.taskingLoginFail(username001, "bad", pWordError);
+		});
+	});
+
+});

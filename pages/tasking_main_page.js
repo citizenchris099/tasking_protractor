@@ -17,92 +17,70 @@ locatorMap.set("logOut", by.xpath("//span[.='Log Out']"));
  */
 locatorMap.set("searchBox", by.xpath(".//input[@placeholder='Search']"));
 locatorMap.set("quickFiltersParent", by.xpath("//ul[@class='quickfilters']"));
-locatorMap
-		.set(
-				"quickFilterMenu",
-				by
-						.xpath(".//a[@class='quickfilter-item-link'] [contains(text(), 'Quick Filters')]"));
-locatorMap.set("quickFilterMenuChoices", by
-		.xpath(".//div[contains(@class,'quickfilter-item-choiceset')]"));
+locatorMap.set("quickFilterMenu", by.xpath(".//a[@class='quickfilter-item-link'] [contains(text(), 'Quick Filters')]"));
+locatorMap.set("quickFilterMenuChoices", by.xpath(".//div[contains(@class,'quickfilter-item-choiceset')]"));
+locatorMap.set("allFilters", by.xpath("//span[.='All Filters']"));
+locatorMap.set("allFilterLocation", by.xpath("//div[@id='locations']"));
+locatorMap.set("allFilterDue", by.xpath("//div[@id='due']"));
+locatorMap.set("allFilterLabels", by.xpath("//div[@id='labels']"));
+locatorMap.set("allFilterAssignee", by.xpath("//div[@id='assignees']"));
+locatorMap.set("allFilterStatus", by.xpath("//div[@id='statuses']"));
+locatorMap.set("allFilterMoreO", by.xpath("//div[@id='moreOptions']"));
+locatorMap.set("allFiltersDropDownParent", by.xpath(".//div[contains(@class,'taskqueuefilters-filteritem-dropdown')]"));
+locatorMap.set("allFiltersSearch", by.xpath(".//input[contains(@placeholder,'Search')]"));
+locatorMap.set("clearAdFilters", by.xpath("//span[.='Clear All']"));
 
 /**
  * locators: add task
  */
-locatorMap.set("showAddTaskParent", by
-		.xpath("//button[contains(@class,'taskquickaddtoggle-button')]"));
-locatorMap.set("showAddTaskForm", by
-		.xpath(".//i[contains(@class,'scicon-plus-circle-outline')]"));
-locatorMap.set("addTaskParent", by
-		.xpath("//div[contains(@class,'taskquickaddform')]"));
-locatorMap.set("addTaskSummary", by
-		.xpath(".//textarea[contains(@class,'taskquickaddform-summary')]"));
-locatorMap.set("addTaskDescription", by
-		.xpath(".//textarea[contains(@class,'taskquickaddform-description')]"));
-locatorMap.set("addTasklocation", by
-		.xpath(".//div[contains(@class,'Select-placeholder')] [.='Location']"));
-locatorMap.set("addTaskDueDate", by
-		.xpath(".//input[contains(@placeholder,'Due')]"));
+locatorMap.set("showAddTaskParent", by.xpath("//button[contains(@class,'taskquickaddtoggle-button')]"));
+locatorMap.set("showAddTaskForm", by.xpath(".//i[contains(@class,'scicon-plus-circle-outline')]"));
+locatorMap.set("addTaskParent", by.xpath("//div[contains(@class,'taskquickaddform')]"));
+locatorMap.set("addTaskSummary", by.xpath(".//textarea[contains(@class,'taskquickaddform-summary')]"));
+locatorMap.set("addTaskDescription", by.xpath(".//textarea[contains(@class,'taskquickaddform-description')]"));
+locatorMap.set("addTasklocation", by.xpath(".//div[contains(@class,'Select-placeholder')] [.='Location']"));
+locatorMap.set("addTaskDueDate", by.xpath(".//input[contains(@placeholder,'Due')]"));
 locatorMap.set("addTasklabels", by.xpath(".//div[.='Labels']"));
 locatorMap.set("addTaskAssignee", by.xpath(".//div[.='Assignee']"));
 locatorMap.set("addTaskCreate", by.xpath("//button[.='Create']"));
-locatorMap.set("dueDateParent", by
-		.xpath(".//div[contains(@class,'datepicker__input-container')]"));
+locatorMap.set("dueDateParent", by.xpath(".//div[contains(@class,'datepicker__input-container')]"));
 locatorMap.set("dueDateClear", by.xpath(".//div[@class='close-icon']"));
 
 /**
  * locators: task queue
  */
-locatorMap.set("taskListGroup", by
-		.xpath("//div[@class='taskqueue-togglegroup']"));
-locatorMap
-		.set("taskListParent", by.xpath("//div[@class='taskqueue-tasklist']"));
+locatorMap.set("taskListGroup", by.xpath("//div[@class='taskqueue-togglegroup']"));
+locatorMap.set("taskListParent", by.xpath("//div[@class='taskqueue-tasklist']"));
 locatorMap.set("moreTaskParent", by.xpath("//div[@class='load-more']"));
 locatorMap.set("moreTaskButton", by.xpath(".//button[.='More Tasks']"));
-locatorMap.set("taskIsSelected", by
-		.xpath(".//div[contains(@class,'is-selected')]"));
-locatorMap.set("taskStatus", by
-		.xpath(".//span[@class='js-taskqueue-task-status']"));
-locatorMap.set("taskComplete", by
-		.xpath(".//div[contains(@class,'mod-complete')]"));
-locatorMap.set("taskBlocked", by
-		.xpath(".//i[contains(@class,'scicon-alert-octagon')]"));
-locatorMap.set("taskCanceled", by
-		.xpath(".//i[contains(@class,'scicon-block-helper')]"));
+locatorMap.set("taskIsSelected", by.xpath(".//div[contains(@class,'is-selected')]"));
+locatorMap.set("taskStatus", by.xpath(".//span[@class='js-taskqueue-task-status']"));
+locatorMap.set("taskComplete", by.xpath(".//div[contains(@class,'mod-complete')]"));
+locatorMap.set("taskBlocked", by.xpath(".//i[contains(@class,'scicon-alert-octagon')]"));
+locatorMap.set("taskCanceled", by.xpath(".//i[contains(@class,'scicon-block-helper')]"));
+locatorMap.set("taskStar", by.xpath(".//div[@class='taskqueue-task-star']"));
 
 /**
  * locators: task details
  */
 locatorMap.set("taskDetailsParent", by.xpath("//div[@class='taskdetails']"));
 locatorMap.set("taskDetailsSummary", by.xpath(".//textarea[@name='summary']"));
-locatorMap.set("taskDetailsDescription", by
-		.xpath(".//textarea[@name='description']"));
-locatorMap
-		.set(
-				"taskDetailsStatus",
-				by
-						.xpath(".//button[contains(@class,'mod-dropdownarrow')] [@aria-expanded='false']"));
+locatorMap.set("taskDetailsDescription", by.xpath(".//textarea[@name='description']"));
+locatorMap.set("taskDetailsStatus", by.xpath(".//button[contains(@class,'mod-dropdownarrow')] [@aria-expanded='false']"));
 locatorMap.set("taskDetailsStatusOption", by.xpath(".//a[@name='status']"));
-locatorMap.set("taskDetailsBlockCancel", by
-		.xpath(".//span[@class='scicon-dots-horizontal']"));
-locatorMap.set("taskDetailsBlockedCanceledArea", by
-		.xpath(".//div[contains(@class,'alert')]"));
-locatorMap.set("taskDetailsBlockedCanceledAlert", by
-		.xpath(".//div[.='Because I said so'] [@class='alert-description']"));
+locatorMap.set("taskDetailsBlockCancel", by.xpath(".//span[@class='scicon-dots-horizontal']"));
+locatorMap.set("taskDetailsBlockedCanceledArea", by.xpath(".//div[contains(@class,'alert')]"));
+locatorMap.set("taskDetailsBlockedCanceledAlert", by.xpath(".//div[.='Because I said so'] [@class='alert-description']"));
 
 /**
  * locators: comments
  */
-locatorMap.set("taskDetailsCommentField", by
-		.xpath(".//textarea[contains(@placeholder,'Add a comment')]"));
-locatorMap.set("taskDetailsCommentButton", by
-		.xpath(".//button[contains(text(), 'Comment')]"));
+locatorMap.set("taskDetailsCommentField", by.xpath(".//textarea[contains(@placeholder,'Add a comment')]"));
+locatorMap.set("taskDetailsCommentButton", by.xpath(".//button[contains(text(), 'Comment')]"));
 locatorMap.set("existingCommentParent", by.xpath(".//div[@class='comment']"));
-locatorMap.set("existingCommentAuthor", by
-		.css(".comment-author span:nth-child(1)"));
-locatorMap.set("existingCommentDateTime", by
-		.css(".comment-author span:nth-child(2)"));
-locatorMap
-		.set("existingCommentText", by.xpath(".//div[@class='comment-text']"));
+locatorMap.set("existingCommentAuthor", by.css(".comment-author span:nth-child(1)"));
+locatorMap.set("existingCommentDateTime", by.css(".comment-author span:nth-child(2)"));
+locatorMap.set("existingCommentText", by.xpath(".//div[@class='comment-text']"));
 
 var flow = protractor.promise.controlFlow();
 function waitOne() {
@@ -117,60 +95,62 @@ function sleep() {
  * elements
  */
 
+var allFilterDueTo = function() {
+	return element(locatorMap.get("allFilterDue")).element(locatorMap.get("allFiltersDropDownParent")).element(
+			locatorMap.get("allFilterDueTo"));
+};
+
 var searchFilter = function() {
 	return element(locatorMap.get("searchBox"));
 }
 
 var taskDetailsBlockedCanceledHeader = function(value) {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("taskDetailsBlockedCanceledArea")).element(
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsBlockedCanceledArea")).element(
 			by.xpath(".//span[contains(text(), '" + value + "')]"));
 }
 
 var taskDetailsBlockedCanceledAlert = function() {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("taskDetailsBlockedCanceledArea")).element(
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsBlockedCanceledArea")).element(
 			locatorMap.get("taskDetailsBlockedCanceledAlert"));
 }
 
 var taskDetailsBlockedCanceledButton = function(value) {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("taskDetailsBlockedCanceledArea")).element(
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsBlockedCanceledArea")).element(
 			by.xpath(".//button[contains(text(), '" + value + "')]"));
 }
 
 var taskFlag = function(value) {
-	return element(locatorMap.get("taskListParent")).element(
-			locatorMap.get("taskIsSelected")).element(locatorMap.get(value));
+	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected"))
+			.element(locatorMap.get(value));
+}
+
+var starTask = function() {
+	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected")).element(
+			locatorMap.get("taskStar"));
 }
 
 var taskQueueGroup = function(value) {
 	return element(locatorMap.get("taskListGroup")).element(
-			by.xpath(".//a[contains(text(), '" + value
-					+ "')] [contains(@class,'togglegroup-item-link ')]"));
+			by.xpath(".//a[contains(text(), '" + value + "')] [contains(@class,'togglegroup-item-link ')]"));
 }
 
 var activeTaskQueueGroup = function(value) {
 	return element(locatorMap.get("taskListGroup")).element(
-			by.xpath(".//a[contains(text(), '" + value
-					+ "')] [contains(@class,'is-active')]"));
+			by.xpath(".//a[contains(text(), '" + value + "')] [contains(@class,'is-active')]"));
 }
 
 var allOrMyTaskFilter = function(value) {
 	return element(locatorMap.get("quickFiltersParent")).element(
-			by.xpath(".//a[contains(text(), '" + value
-					+ "')] [contains(@class,'quickfilter-item-link')]"));
+			by.xpath(".//a[contains(text(), '" + value + "')] [contains(@class,'quickfilter-item-link')]"));
 }
 
 var allOrMyTaskFilterActive = function(value) {
 	return element(locatorMap.get("quickFiltersParent")).element(
-			by.xpath(".//a[contains(text(), '" + value
-					+ "')] [contains(@class,'is-active')]"));
+			by.xpath(".//a[contains(text(), '" + value + "')] [contains(@class,'is-active')]"));
 }
 
 var taskStatusMenu = function() {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("taskDetailsStatus"));
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsStatus"));
 };
 
 var taskStatusOptions = function() {
@@ -178,30 +158,25 @@ var taskStatusOptions = function() {
 };
 
 var taskStatus = function() {
-	return element(locatorMap.get("taskListParent")).element(
-			locatorMap.get("taskIsSelected")).element(
+	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected")).element(
 			locatorMap.get("taskStatus"));
 }
 
 var commentField = function() {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("taskDetailsCommentField"));
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsCommentField"));
 };
 
 var addCommentButton = function() {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("taskDetailsCommentButton"));
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsCommentButton"));
 };
 
 var commentDetails = function(child) {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("existingCommentParent")).element(
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("existingCommentParent")).element(
 			locatorMap.get(child))
 }
 
 var clearDueDateElement = function(parent) {
-	return element(parent).element(locatorMap.get("dueDateParent")).element(
-			locatorMap.get("dueDateClear"));
+	return element(parent).element(locatorMap.get("dueDateParent")).element(locatorMap.get("dueDateClear"));
 };
 
 var avatarElement = function() {
@@ -213,8 +188,7 @@ var logOutElement = function() {
 };
 
 var addTaskElement = function() {
-	return basePage.findElement(locatorMap.get("showAddTaskParent"), locatorMap
-			.get("showAddTaskForm"));
+	return basePage.findElement(locatorMap.get("showAddTaskParent"), locatorMap.get("showAddTaskForm"));
 };
 
 var revealAddTaskForm = function() {
@@ -222,8 +196,7 @@ var revealAddTaskForm = function() {
 };
 
 var datePickerElement = function(parent) {
-	return basePage.findElement(locatorMap.get(parent), locatorMap
-			.get("addTaskDueDate"));
+	return basePage.findElement(locatorMap.get(parent), locatorMap.get("addTaskDueDate"));
 };
 
 var createTaskElement = function() {
@@ -231,79 +204,81 @@ var createTaskElement = function() {
 };
 
 var taskInQueue = function(value) {
-	return basePage.findElement(locatorMap.get("taskListParent"), by
-			.xpath("//span[contains(text(), '" + value
-					+ "')] [@class='js-taskqueue-task-summary']"))
+	return basePage.findElement(locatorMap.get("taskListParent"), by.xpath("//span[contains(text(), '" + value
+			+ "')] [@class='js-taskqueue-task-summary']"))
 };
 
 var numberOfTaskInQueue = function(value) {
-	return element.all(by.xpath("//span[contains(text(), '" + value
-			+ "')] [@class='js-taskqueue-task-summary']"));
+	return element.all(by.xpath("//span[contains(text(), '" + value + "')] [@class='js-taskqueue-task-summary']"));
 }
 
 var moreTaskElement = function() {
-	return basePage.findElement(locatorMap.get("moreTaskParent"), locatorMap
-			.get("moreTaskButton"));
+	return basePage.findElement(locatorMap.get("moreTaskParent"), locatorMap.get("moreTaskButton"));
 };
 
 var taskDetailLocationAssignee = function(value) {
-	return basePage.findElement(locatorMap.get("taskDetailsParent"), by
-			.xpath(".//div[contains(text(), '" + value
-					+ "')] [@class='Select-placeholder']"));
+	return basePage.findElement(locatorMap.get("taskDetailsParent"), by.xpath(".//div[contains(text(), '" + value
+			+ "')] [@class='Select-placeholder']"));
 };
 
 var taskDetailSummaryElement = function() {
-	return basePage.findElement(locatorMap.get("taskDetailsParent"), locatorMap
-			.get("taskDetailsSummary"));
+	return basePage.findElement(locatorMap.get("taskDetailsParent"), locatorMap.get("taskDetailsSummary"));
 };
 
 var taskDetailDescriptionElement = function() {
-	return basePage.findElement(locatorMap.get("taskDetailsParent"), locatorMap
-			.get("taskDetailsDescription"));
+	return basePage.findElement(locatorMap.get("taskDetailsParent"), locatorMap.get("taskDetailsDescription"));
 };
 
 var taskDetailLabelElement = function(value) {
 	return basePage.findElement(locatorMap.get("taskDetailsParent"), by
-			.xpath(".//span[contains(text(), '×')] [contains(@data-reactid,'"
-					+ value + "')]"))
+			.xpath(".//span[contains(text(), '×')] [contains(@data-reactid,'" + value + "')]"))
 };
 
 var blockOrCancelTaskMenu = function() {
-	return element(locatorMap.get("taskDetailsParent")).element(
-			locatorMap.get("taskDetailsBlockCancel"));
+	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsBlockCancel"));
 }
 
 var blockOrCancelOption = function(value) {
 	return element(locatorMap.get("taskDetailsParent")).element(
-			by.xpath(".//a[contains(text(), '" + value
-					+ "')] [contains(@class,'dropdown-item')]"));
+			by.xpath(".//a[contains(text(), '" + value + "')] [contains(@class,'dropdown-item')]"));
 };
 
 var quickFilterskMenu = function() {
-	return element(locatorMap.get("quickFiltersParent")).element(
-			locatorMap.get("quickFilterMenu"));
+	return element(locatorMap.get("quickFiltersParent")).element(locatorMap.get("quickFilterMenu"));
 };
 
 var quickFilterOption = function(value) {
-	return element(locatorMap.get("quickFiltersParent"))
-			.element(locatorMap.get("quickFilterMenuChoices"))
-			.element(
-					by
-							.xpath(".//div[contains(text(), '"
-									+ value
-									+ "')] [contains(@class,'quickfilter-item-choiceset-link')]"));
+	return element(locatorMap.get("quickFiltersParent")).element(locatorMap.get("quickFilterMenuChoices")).element(
+			by.xpath(".//div[contains(text(), '" + value + "')] [contains(@class,'quickfilter-item-choiceset-link')]"));
+};
+
+var allFiltersMain = function() {
+	return element(locatorMap.get("allFilters"));
+};
+
+var allFiltersSelection = function(value) {
+	return element(By.xpath("//div[contains(@data-reactid,'" + value + "')] [@class='checkbox']"));
+};
+
+var allFilterDueFromTo = function(value) {
+	return element(locatorMap.get("allFilterDue")).element(locatorMap.get("allFiltersDropDownParent")).element(
+			by
+					.xpath(".//span[contains(text(), '" + value
+							+ "')] [@class='taskqueuefilters-filteritem-dropdown-date-label']"));
 };
 
 /**
  * actions
  */
 
+var starTaskClick = function() {
+	starTask().click();
+};
+
 var checkTaskDetailsBlockedCanceled = function(value1, value2, boolean) {
-	expect(taskDetailsBlockedCanceledHeader(value1).isDisplayed())
-			.toBe(boolean);
+	expect(taskDetailsBlockedCanceledHeader(value1).isDisplayed()).toBe(boolean);
 	expect(taskDetailsBlockedCanceledAlert().isDisplayed()).toBe(boolean);
-	expect(taskDetailsBlockedCanceledButton(value2).isDisplayed())
-			.toBe(boolean);
+	expect(taskDetailsBlockedCanceledButton(value2).isDisplayed()).toBe(boolean);
 }
 
 var checkTaskFlag = function(value, boolean) {
@@ -375,22 +350,19 @@ var taskValueEntry = function(parent, value2, obj) {
 	for (var count = 0; count < value2.length; count++) {
 		if (value2[count] == "labelEntry") {
 			sleep();
-			basePage.dynamicSendKeysLoop(locatorMap.get(parent), locatorMap
-					.get("addTasklabels"), obj[value2[count]]);
+			basePage.dynamicSendKeysLoop(locatorMap.get(parent), locatorMap.get("addTasklabels"), obj[value2[count]]);
 		} else if (value2[count] == "addedDays") {
 			datePickerElement(parent).click();
 			datePicker.useDatePicker(obj[value2[count]]);
 		} else {
 			sleep();
-			basePage.dynamicSendKeys(locatorMap.get(parent), locatorMap
-					.get(value2[count]), obj[value2[count]]);
+			basePage.dynamicSendKeys(locatorMap.get(parent), locatorMap.get(value2[count]), obj[value2[count]]);
 		}
 	}
 }
 
 var useSearchFilter = function(value) {
-	browser.actions().mouseMove(searchFilter()).click().sendKeys(value,
-			protractor.Key.ENTER).perform();
+	browser.actions().mouseMove(searchFilter()).click().sendKeys(value, protractor.Key.ENTER).perform();
 }
 
 var addCommentToTask = function(value) {
@@ -399,8 +371,7 @@ var addCommentToTask = function(value) {
 };
 
 var commentInfoValidation = function(obj) {
-	var value = [ "existingCommentAuthor", "existingCommentDateTime",
-			"existingCommentText" ];
+	var value = [ "existingCommentAuthor", "existingCommentDateTime", "existingCommentText" ];
 	for (var count = 0; count < value.length; count++) {
 		(function(passedInCount) {
 			commentDetails(value[passedInCount]).getText().then(function(text) {
@@ -433,12 +404,51 @@ var selectQuickFilter = function(value) {
 	quickFilterOption(value).click();
 };
 
+var useAllFilters = function(value1, value2) {
+	allFiltersMain().click();
+	element(locatorMap.get(value1)).click();
+	allFiltersSelection(value2).click();
+	allFiltersMain().click();
+};
+
+var setAllFilterDueDate = function(value1, value2) {
+	element(locatorMap.get("allFilterDue")).click();
+	allFilterDueFromTo("From").click();
+	datePicker.useDatePicker(value1);
+	allFilterDueFromTo("To").click();
+	datePicker.useDatePicker(value2);
+};
+
 /**
  * services
  */
 
-tasking_main_page.prototype.tasksICreatedFilter = function() {
+tasking_main_page.prototype.useAllFilters = function(value1, value2) {
+	for (var count = 0; count < value1.length; count++) {
+		useAllFilters(value1[count], value2[count]);
+	}
+};
+
+tasking_main_page.prototype.useAllFilterDueDate = function(value1, value2) {
+	allFiltersMain().click();
+	setAllFilterDueDate(value1, value2);
+}
+
+tasking_main_page.prototype.starTaskInQueue = function(obj) {
+	checkTaskDisplayed(obj["addTaskSummary"], true);
+	starTaskClick();
+};
+
+tasking_main_page.prototype.tasksIStarredQuickFilter = function() {
+	selectQuickFilter("Tasks I Starred");
+};
+
+tasking_main_page.prototype.tasksICreatedQuickFilter = function() {
 	selectQuickFilter("Tasks I Created");
+};
+
+tasking_main_page.prototype.blockedTasksQuickFilter = function() {
+	selectQuickFilter("Blocked Tasks");
 };
 
 tasking_main_page.prototype.allTasksFilter = function() {
@@ -532,18 +542,14 @@ tasking_main_page.prototype.addTask = function(value2, obj) {
 tasking_main_page.prototype.editTaskDetails = function(value, obj, editobj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	for (var count = 0; count < value.length; count++) {
-		if (value[count] == "addTasklocation"
-				|| value[count] == "addTaskAssignee") {
-			basePage
-					.dynamicBackSpace(taskDetailLocationAssignee(obj[value[count]]));
+		if (value[count] == "addTasklocation" || value[count] == "addTaskAssignee") {
+			basePage.dynamicBackSpace(taskDetailLocationAssignee(obj[value[count]]));
 		} else if (value[count] == "addedDays") {
 			clearDueDateElement(locatorMap.get("taskDetailsParent")).click();
 		} else if (value[count] == "labelEntry") {
 			removeTaskDetailsLabels(obj);
-		} else if (value[count] == "taskDetailsSummary"
-				|| value[count] == "taskDetailsDescription") {
-			element(locatorMap.get("taskDetailsParent")).element(
-					locatorMap.get(value[count])).clear().sendKeys("/",
+		} else if (value[count] == "taskDetailsSummary" || value[count] == "taskDetailsDescription") {
+			element(locatorMap.get("taskDetailsParent")).element(locatorMap.get(value[count])).clear().sendKeys("/",
 					protractor.Key.BACK_SPACE, protractor.Key.TAB);
 		}
 	}
@@ -559,15 +565,11 @@ tasking_main_page.prototype.checkTaskDetails = function(value, obj) {
 		if (value[count] == "addTasklabels") {
 			checkTaskDetailsLabels(obj);
 		} else if (value[count] == "addTaskDescription") {
-			basePage.textCheck(taskDetailDescriptionElement(),
-					obj["addTaskDescription"]);
-		} else if (value[count] == "addTasklocation"
-				|| value[count] == "addTaskAssignee") {
-			basePage.displayCheck(
-					taskDetailLocationAssignee(obj[value[count]]), true);
+			basePage.textCheck(taskDetailDescriptionElement(), obj["addTaskDescription"]);
+		} else if (value[count] == "addTasklocation" || value[count] == "addTaskAssignee") {
+			basePage.displayCheck(taskDetailLocationAssignee(obj[value[count]]), true);
 		} else if (value[count] == "addedDays") {
-			expect(datePickerElement("taskDetailsParent").getAttribute('value'))
-					.toEqual(obj["displayDate"]);
+			expect(datePickerElement("taskDetailsParent").getAttribute('value')).toEqual(obj["displayDate"]);
 		}
 	}
 
