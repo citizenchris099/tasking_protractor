@@ -536,7 +536,7 @@ tasking_main_page.prototype.checkTaskDetails = function(value, obj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	basePage.textCheck(taskDetailSummaryElement(), obj["addTaskSummary"]);
 	for (var count = 0; count < value.length; count++) {
-		if (value[count] == "addTasklabels") {
+		if (value[count] == "labelEntry") {
 			checkTaskDetailsLabels(obj);
 		} else if (value[count] == "addTaskDescription") {
 			basePage.textCheck(taskDetailDescriptionElement(), obj["addTaskDescription"]);

@@ -2,6 +2,28 @@ var login_page = require('../pages/login_page.js').login_page;
 var tasking_main_page = require('../pages/tasking_main_page.js').tasking_main_page;
 var phraseGen = require('../pages/phraseGen.js').phraseGen;
 var taskInformation = require('./taskInformation.js').taskInformation;
+
+// //////// task objects//////////
+var task001Obj = taskInformation.task001();
+var task002Obj = taskInformation.task002();
+var task003Obj = taskInformation.task003();
+var task004Obj = taskInformation.task004();
+var task005Obj = taskInformation.task005();
+
+// ////////entry & edit data arrays//////////
+var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation", "labelEntry", "addedDays", "addTaskAssignee" ];
+var taskEdit = [ "taskDetailsSummary", "taskDetailsDescription", "addTasklocation", "addTaskAssignee", "labelEntry" ];
+var task001Entry = taskInformation.task001Entry();
+var task002Entry = taskInformation.task002Entry();
+var task003Entry = taskInformation.task003Entry();
+var task004Entry = taskInformation.task004Entry();
+var task005Entry = taskInformation.task005Entry();
+
+var user1 = "Test User";
+var user2 = "Test User2";
+var days = 30;
+var daysEdit = 10;
+var comment = phraseGen.randomPhrase();
 var localTasking = 'http://localhost:3000/';
 var publicTasking = 'http://tasking.scienergydev.com/'
 var username001 = 'testusername';
@@ -12,13 +34,6 @@ var username003 = 'wr';
 var password003 = 'wr';
 var uNameError = "User not found";
 var pWordError = "Incorrect password";
-var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation", "labelEntry", "addedDays", "addTaskAssignee" ];
-var taskEdit = [ "taskDetailsSummary", "taskDetailsDescription", "addTasklocation", "addTaskAssignee", "labelEntry" ];
-var user1 = "Test User";
-var user2 = "Test User2";
-var days = 30;
-var daysEdit = 10;
-var comment = phraseGen.randomPhrase();
 
 describe('tasking tests', function() {
 
@@ -30,8 +45,7 @@ describe('tasking tests', function() {
 	});
 	afterEach(function() {
 	});
-
-	describe('add task tests', function() {
+	describe('fixture data tests', function() {
 		beforeEach(function() {
 			login_page.isLoginPageLoaded();
 			login_page.taskingLogin(username001, password001);
@@ -42,8 +56,42 @@ describe('tasking tests', function() {
 			tasking_main_page.logOut();
 			login_page.isLoginPageLoaded();
 		});
-		xdescribe('basic add & edit tests', function() {
-			it('simple add task', function() {
+
+		xit('fixture data task001 verification', function() {
+			tasking_main_page.checkTaskDetails(task001Entry, task001Obj);
+		});
+
+		xit('fixture data task002 verification', function() {
+			tasking_main_page.checkTaskDetails(task002Entry, task002Obj);
+		});
+
+		xit('fixture data task003 verification', function() {
+			tasking_main_page.checkTaskDetails(task003Entry, task003Obj);
+		});
+		
+		it('fixture data task004 verification', function() {
+			tasking_main_page.checkTaskDetails(task004Entry, task004Obj);
+		});
+		
+		it('fixture data task005 verification', function() {
+			tasking_main_page.checkTaskDetails(task005Entry, task005Obj);
+		});
+
+	});
+
+	xdescribe('add task tests', function() {
+		beforeEach(function() {
+			login_page.isLoginPageLoaded();
+			login_page.taskingLogin(username001, password001);
+			tasking_main_page.isMainPageLoaded();
+		});
+
+		afterEach(function() {
+			tasking_main_page.logOut();
+			login_page.isLoginPageLoaded();
+		});
+		describe('basic add & edit tests', function() {
+			xit('simple add task', function() {
 				var addTaskTest = taskInformation.addTaskData();
 				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"]);
 				tasking_main_page.addTask(taskEntry, addTaskTest);
@@ -51,7 +99,7 @@ describe('tasking tests', function() {
 				login_page.taskingLogin(username001, password001);
 				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
 			});
-			it('edit task details', function() {
+			xit('edit task details', function() {
 				var addTaskTest = taskInformation.addTaskData();
 				var editTaskTest = taskInformation.editTaskValues(taskEdit, "not started", addTaskTest);
 				tasking_main_page.addTask(taskEntry, addTaskTest);
@@ -66,13 +114,15 @@ describe('tasking tests', function() {
 			});
 
 			it('add comment', function() {
-				var addTaskTest = addTaskData();
+				var addTaskTest = taskInformation.addTaskData();
 				var commentTaskTest = taskInformation.editTaskValues([ "" ], "not started", addTaskTest);
+				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"] + " commentTaskTest summary = "
+						+ commentTaskTest["addTaskSummary"]);
 				tasking_main_page.addTask(taskEntry, addTaskTest);
 				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
 				tasking_main_page.logOut();
 				login_page.taskingLogin(username001, password001);
-				tasking_main_page.addComment(comment);
+				tasking_main_page.addComment(commentTaskTest["existingCommentText"]);
 				tasking_main_page.logOut();
 				login_page.taskingLogin(username001, password001);
 				tasking_main_page.checkComment(commentTaskTest);
@@ -252,7 +302,7 @@ describe('tasking tests', function() {
 			});
 
 		});
-		describe('add task all filters tests', function() {
+		xdescribe('add task all filters tests', function() {
 			it('All filters Location happy', function() {
 				var addTaskTest = taskInformation.addTaskData();
 				var allFilterMenus = [ "allFilterLocation" ];
