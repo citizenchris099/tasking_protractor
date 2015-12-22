@@ -9,6 +9,16 @@ var task002Obj = taskInformation.task002();
 var task003Obj = taskInformation.task003();
 var task004Obj = taskInformation.task004();
 var task005Obj = taskInformation.task005();
+var task006Obj = taskInformation.task006();
+var task007Obj = taskInformation.task007();
+var task008Obj = taskInformation.task008();
+var task009Obj = taskInformation.task009();
+var task010Obj = taskInformation.task010();
+var task011Obj = taskInformation.task011();
+var task012Obj = taskInformation.task012();
+var task013Obj = taskInformation.task013();
+var task014Obj = taskInformation.task014();
+var task015Obj = taskInformation.task015();
 
 // ////////entry & edit data arrays//////////
 var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation", "labelEntry", "addedDays", "addTaskAssignee" ];
@@ -18,6 +28,16 @@ var task002Entry = taskInformation.task002Entry();
 var task003Entry = taskInformation.task003Entry();
 var task004Entry = taskInformation.task004Entry();
 var task005Entry = taskInformation.task005Entry();
+var task006Entry = taskInformation.task006Entry();
+var task007Entry = taskInformation.task007Entry();
+var task008Entry = taskInformation.task008Entry();
+var task009Entry = taskInformation.task009Entry();
+var task010Entry = taskInformation.task010Entry();
+var task011Entry = taskInformation.task011Entry();
+var task012Entry = taskInformation.task012Entry();
+var task013Entry = taskInformation.task013Entry();
+var task014Entry = taskInformation.task014Entry();
+var task015Entry = taskInformation.task015Entry();
 
 var user1 = "Test User";
 var user2 = "Test User2";
@@ -57,24 +77,230 @@ describe('tasking tests', function() {
 			login_page.isLoginPageLoaded();
 		});
 
-		xit('fixture data task001 verification', function() {
-			tasking_main_page.checkTaskDetails(task001Entry, task001Obj);
+		xdescribe('task detail validation', function() {
+			it('fixture data task001 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task001Obj, "Open");
+				tasking_main_page.checkTaskDetails(task001Entry, task001Obj);
+			});
+
+			it('fixture data task002 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+				tasking_main_page.checkTaskDetails(task002Entry, task002Obj);
+			});
+
+			it('fixture data task003 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+				tasking_main_page.checkTaskDetails(task003Entry, task003Obj);
+			});
+
+			it('fixture data task004 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+				tasking_main_page.checkTaskDetails(task004Entry, task004Obj);
+			});
+
+			it('fixture data task005 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+				tasking_main_page.checkTaskDetails(task005Entry, task005Obj);
+			});
+
+			it('fixture data task006 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+				tasking_main_page.checkTaskDetails(task006Entry, task006Obj);
+			});
+
+			it('fixture data task007 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+				tasking_main_page.checkTaskDetails(task007Entry, task007Obj);
+			});
+
+			it('fixture data task008 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+				tasking_main_page.checkTaskDetails(task008Entry, task008Obj);
+			});
+
+			it('fixture data task009 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+				tasking_main_page.checkTaskDetails(task009Entry, task009Obj);
+			});
+
+			it('fixture data task010 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+				tasking_main_page.checkTaskDetails(task010Entry, task010Obj);
+			});
+
+			it('fixture data task011 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+				tasking_main_page.checkTaskDetails(task011Entry, task011Obj);
+			});
+
+			it('fixture data task012 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+				tasking_main_page.checkTaskDetails(task012Entry, task012Obj);
+			});
+
+			it('fixture data task013 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+				tasking_main_page.checkTaskDetails(task013Entry, task013Obj);
+			});
+
+			it('fixture data task014 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+				tasking_main_page.checkTaskDetails(task014Entry, task014Obj);
+			});
+
+			it('fixture data task015 task detail verification', function() {
+				tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+				tasking_main_page.checkTaskDetails(task015Entry, task015Obj);
+			});
 		});
 
-		xit('fixture data task002 verification', function() {
-			tasking_main_page.checkTaskDetails(task002Entry, task002Obj);
-		});
+		xdescribe('status validation', function() {
+			it('fixture data task001 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task001Obj, "Open");
+				tasking_main_page.checkTaskStatus(task001Obj);
+			});
 
-		xit('fixture data task003 verification', function() {
-			tasking_main_page.checkTaskDetails(task003Entry, task003Obj);
+			it('fixture data task002 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+				tasking_main_page.checkTaskStatus(task002Obj);
+			});
+
+			it('fixture data task003 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+				tasking_main_page.checkTaskStatus(task003Obj);
+			});
+
+			it('fixture data task004 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+				tasking_main_page.checkTaskStatus(task004Obj);
+			});
+
+			it('fixture data task005 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+				tasking_main_page.checkTaskStatus(task005Obj);
+			});
+
+			it('fixture data task006 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+				tasking_main_page.checkTaskFlag(task006Obj, true);
+			});
+
+			it('fixture data task007 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+				tasking_main_page.checkTaskFlag(task007Obj, true);
+			});
+
+			it('fixture data task008 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+				tasking_main_page.checkTaskStatus(task008Obj);
+			});
+
+			it('fixture data task009 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+				tasking_main_page.checkTaskStatus(task009Obj);
+			});
+
+			it('fixture data task010 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+				tasking_main_page.checkTaskStatus(task010Obj);
+			});
+
+			it('fixture data task011 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+				tasking_main_page.checkTaskStatus(task011Obj);
+			});
+
+			it('fixture data task012 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+				tasking_main_page.checkTaskStatus(task012Obj);
+			});
+
+			it('fixture data task013 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+				tasking_main_page.checkTaskStatus(task013Obj);
+			});
+
+			it('fixture data task014 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+				tasking_main_page.checkTaskStatus(task014Obj);
+			});
+
+			it('fixture data task015 status verification', function() {
+				tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+				tasking_main_page.checkTaskStatus(task015Obj);
+			});
+
 		});
-		
-		it('fixture data task004 verification', function() {
-			tasking_main_page.checkTaskDetails(task004Entry, task004Obj);
-		});
-		
-		it('fixture data task005 verification', function() {
-			tasking_main_page.checkTaskDetails(task005Entry, task005Obj);
+		describe('filter validation', function() {
+			describe('my tasks quick filter validation', function() {
+				describe('my tasks quick filter validation:  test user1', function() {
+					it('test user1 my tasks quick filter task003 visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task004 visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task005 visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task006 visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+					});
+					it('test user1 my tasks quick filter task009 visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task010 visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task011 visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task001 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task002 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task007 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('test user1 my tasks quick filter task008 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task012 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task013 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task014 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('test user1 my tasks quick filter task015 not visible', function() {
+						tasking_main_page.myTasksFilter();
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+					describe('my tasks quick filter validation:  test user1', function() {
+						
+					});
+				});
+
+			});
+
 		});
 
 	});
@@ -122,7 +348,7 @@ describe('tasking tests', function() {
 				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
 				tasking_main_page.logOut();
 				login_page.taskingLogin(username001, password001);
-				tasking_main_page.addComment(commentTaskTest["existingCommentText"]);
+				tasking_main_page.addComment(commentTaskTest, commentTaskTest["existingCommentText"]);
 				tasking_main_page.logOut();
 				login_page.taskingLogin(username001, password001);
 				tasking_main_page.checkComment(commentTaskTest);

@@ -574,7 +574,8 @@ tasking_main_page.prototype.changeTaskStatus = function(obj) {
 	selectTaskStatus(statusMap.get(obj["taskStatus"]));
 };
 
-tasking_main_page.prototype.addComment = function(value) {
+tasking_main_page.prototype.addComment = function(obj, value) {
+	checkTaskDisplayed(obj["addTaskSummary"], true);
 	addCommentToTask(value);
 };
 

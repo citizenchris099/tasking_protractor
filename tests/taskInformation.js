@@ -4,7 +4,7 @@ var taskInformation = function() {
 var phraseGen = require('../pages/phraseGen.js').phraseGen;
 var tasking_main_page = require('../pages/tasking_main_page.js').tasking_main_page;
 
-var user1 = "Test User";
+var user1 = "Test User1";
 var user2 = "Test User2";
 var days = 30;
 var daysEdit = 10;
@@ -102,12 +102,21 @@ taskInformation.prototype.task005 = function() {
 	return task005;
 };
 
+taskInformation.prototype.task006Entry = function() {
+	return [ "addTaskSummary", "addTaskAssignee" ];
+};
+
 taskInformation.prototype.task006 = function() {
 	var task006 = new taskData();
 	task006.addTaskSummary = "Task 006";
 	task006.taskStatus = "canceled";
+	task006.flag = "taskCanceled"
 	task006.addTaskAssignee = "Test User1";
 	return task006;
+};
+
+taskInformation.prototype.task007Entry = function() {
+	return [ "addTaskSummary", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task007 = function() {
@@ -115,54 +124,125 @@ taskInformation.prototype.task007 = function() {
 	task007.addTaskSummary = "Task 007";
 	task007.addTaskAssignee = "Test User2";
 	task007.taskStatus = "complete";
-	return task001;
+	task007.flag = "taskComplete"
+	return task007;
+};
+
+taskInformation.prototype.task008Entry = function() {
+	return [ "addTaskSummary", "labelEntry", "addedDays", "addTasklocation", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task008 = function() {
 	var task008 = new taskData();
 	task008.addTaskSummary = "Task 008";
+	task008.addedDays = 5;
+	task008.displayDate = displayDate(5);
+	task008.addTasklocation = "location 2";
+	task008.taskStatus = "in progress";
+	task008.labelEntry = [ 'label 1', 'label 3' ];
+	task008.addTaskAssignee = "Test User2";
+	task008.existingCommentAuthor = "Test User2";
+	task008.existingCommentDateTime = displayDate(0);
+	task008.existingCommentText = "a really well thought out test comment";
 	return task008;
+};
+
+taskInformation.prototype.task009Entry = function() {
+	return [ "addTaskSummary", "labelEntry", "addTasklocation", "addTaskAssignee", "addTaskDescription", "addedDays" ];
 };
 
 taskInformation.prototype.task009 = function() {
 	var task009 = new taskData();
 	task009.addTaskSummary = "Task 009";
+	task009.addedDays = 1;
+	task009.displayDate = displayDate(1);
+	task009.addTasklocation = "location 1";
+	task009.taskStatus = "in progress";
+	task009.labelEntry = [ 'label 1', 'label 4' ];
+	task009.addTaskAssignee = "Test User1";
+	task009.existingCommentAuthor = "Test User1";
+	task009.existingCommentDateTime = displayDate(0);
+	task009.existingCommentText = "a really well thought out test comment";
+	task009.addTaskDescription = "a great description 1";
 	return task009;
+};
+
+taskInformation.prototype.task010Entry = function() {
+	return [ "addTaskSummary", "labelEntry", "addTasklocation", "addTaskAssignee", "addedDays", "addTaskDescription" ];
 };
 
 taskInformation.prototype.task010 = function() {
 	var task010 = new taskData();
 	task010.addTaskSummary = "Task 010";
+	task010.addedDays = 2;
+	task010.displayDate = displayDate(2);
+	task010.addTasklocation = "location 2";
+	task010.taskStatus = "in progress";
+	task010.labelEntry = [ 'label 2', 'label 4' ];
+	task010.addTaskAssignee = "Test User1";
+	task010.existingCommentAuthor = "Test User2";
+	task010.existingCommentDateTime = displayDate(0);
+	task010.existingCommentText = "a really well thought out test comment";
+	task010.addTaskDescription = "a great description 2";
 	return task010;
+};
+
+taskInformation.prototype.task011Entry = function() {
+	return [ "addTaskSummary", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task011 = function() {
 	var task011 = new taskData();
 	task011.addTaskSummary = "Task 011";
+	task011.addTaskAssignee = "Test User1";
+	task011.taskStatus = "not started";
 	return task011;
+};
+
+taskInformation.prototype.task012Entry = function() {
+	return [ "addTaskSummary", "addedDays" ];
 };
 
 taskInformation.prototype.task012 = function() {
 	var task012 = new taskData();
 	task012.addTaskSummary = "Task 012";
+	task012.addedDays = 0;
+	task012.displayDate = displayDate(0);
+	task012.taskStatus = "in progress";
 	return task012;
+};
+
+taskInformation.prototype.task013Entry = function() {
+	return [ "addTaskSummary" ];
 };
 
 taskInformation.prototype.task013 = function() {
 	var task013 = new taskData();
 	task013.addTaskSummary = "Task 013";
+	task013.taskStatus = "in progress";
 	return task013;
+};
+
+taskInformation.prototype.task014Entry = function() {
+	return [ "addTaskSummary" ];
 };
 
 taskInformation.prototype.task014 = function() {
 	var task014 = new taskData();
 	task014.addTaskSummary = "Task 014";
+	task014.taskStatus = "in progress";
 	return task014;
+};
+
+taskInformation.prototype.task015Entry = function() {
+	return [ "addTaskSummary", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task015 = function() {
 	var task015 = new taskData();
 	task015.addTaskSummary = "Task 015";
+	task015.taskStatus = "in progress";
+	task015.addTaskAssignee = "Test User2";
 	return task015;
 };
 
