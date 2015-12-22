@@ -4,9 +4,9 @@ var basePage = require('./page.js').page;
 var datePicker = require('./datePicker.js').datePicker;
 
 var allFilterSearchMap = new Map();
-allFilterSearchMap.set("allFilterLocation","Search locations");
-allFilterSearchMap.set("allFilterLabels","Search labels");
-allFilterSearchMap.set("allFilterAssignee","Search assignees");
+allFilterSearchMap.set("allFilterLocation", "Search locations");
+allFilterSearchMap.set("allFilterLabels", "Search labels");
+allFilterSearchMap.set("allFilterAssignee", "Search assignees");
 
 var statusMap = new Map();
 statusMap.set("not started", 0);
@@ -53,6 +53,8 @@ locatorMap.set("addTaskAssignee", by.xpath(".//div[.='Assignee']"));
 locatorMap.set("addTaskCreate", by.xpath("//button[.='Create']"));
 locatorMap.set("dueDateParent", by.xpath(".//div[contains(@class,'datepicker__input-container')]"));
 locatorMap.set("dueDateClear", by.xpath(".//div[@class='close-icon']"));
+locatorMap.set("toastParent", by.xpath("//div[contains(@className,'sysmsg')]"));
+locatorMap.set("closeToast", by.xpath("//div[@class='sysmsg-content-close']"));
 
 /**
  * locators: task queue
@@ -99,7 +101,7 @@ function sleep() {
 	flow.execute(waitOne);
 };
 
-//////////elements //////////
+// ////////elements //////////
 
 /**
  * elements: user menu
@@ -129,6 +131,10 @@ var datePickerElement = function(parent) {
 
 var createTaskElement = function() {
 	return element(locatorMap.get("addTaskCreate"))
+};
+
+var closeToastMsg = function() {
+	return element(locatorMap.get("closeToast"))
 };
 
 /**
@@ -237,7 +243,7 @@ var quickFilterskMenu = function() {
 };
 
 var quickFilterOption = function(value) {
-	return element(locatorMap.get("quickFiltersParent")).element(locatorMap.get("quickFilterMenuChoices")).element(
+	return element(locatorMap.get("quickFiltersParent")).all(locatorMap.get("quickFilterMenuChoices")).first().element(
 			by.xpath(".//div[contains(text(), '" + value + "')] [contains(@class,'quickfilter-item-choiceset-link')]"));
 };
 
@@ -319,6 +325,15 @@ var taskValueEntry = function(parent, value2, obj) {
 		}
 	}
 }
+
+var closeSuccessMsg = function() {
+	closeToastMsg().isDisplayed().then(function() {
+		closeToastMsg().click();
+	}, function(err) {
+		throw err;
+	})
+
+};
 
 /**
  * actions: task details
@@ -507,6 +522,7 @@ tasking_main_page.prototype.addTask = function(value2, obj) {
 	taskValueEntry("addTaskParent", value2, obj);
 	sleep();
 	createTaskElement().click();
+	closeSuccessMsg();
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 };
 

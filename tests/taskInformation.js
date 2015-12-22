@@ -99,6 +99,7 @@ taskInformation.prototype.task005 = function() {
 	task005.taskStatus = "in progress";
 	task005.addTaskAssignee = "Test User1";
 	task005.addTaskDescription = "a great description 2";
+	task005.flag = "taskBlocked"
 	return task005;
 };
 
