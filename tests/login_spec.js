@@ -236,7 +236,7 @@ describe('tasking tests', function() {
 			});
 
 		});
-		describe('filter validation', function() {
+		xdescribe('filter validation', function() {
 			xdescribe('my tasks quick filter validation', function() {
 				describe('my tasks quick filter validation:  test user1', function() {
 					beforeEach(function() {
@@ -378,7 +378,7 @@ describe('tasking tests', function() {
 
 			});
 
-			xdescribe('tasks I created quick filter validation', function() {
+			describe('tasks I created quick filter validation', function() {
 				describe('tasks I created quick filter validation:  test user 1', function() {
 					beforeEach(function() {
 						login_page.isLoginPageLoaded();
@@ -517,7 +517,7 @@ describe('tasking tests', function() {
 				});
 
 			});
-			xdescribe('tasks I starred quick filter validation', function() {
+			describe('tasks I starred quick filter validation', function() {
 				describe('tasks I starred quick filter validation:  test user 1', function() {
 					beforeEach(function() {
 						login_page.isLoginPageLoaded();
@@ -658,7 +658,7 @@ describe('tasking tests', function() {
 				});
 			});
 
-			xdescribe('blocked tasks quick filter validation', function() {
+			describe('blocked tasks quick filter validation', function() {
 				beforeEach(function() {
 					login_page.isLoginPageLoaded();
 					login_page.taskingLogin(username001, password001);
@@ -726,7 +726,7 @@ describe('tasking tests', function() {
 				});
 			});
 
-			xdescribe('all filters location validation', function() {
+			describe('all filters location validation', function() {
 				var allFilterMenus = [ "allFilterLocation" ];
 
 				beforeEach(function() {
@@ -863,7 +863,7 @@ describe('tasking tests', function() {
 
 			});
 
-			xdescribe('all filters label validation', function() {
+			describe('all filters label validation', function() {
 				beforeEach(function() {
 					login_page.isLoginPageLoaded();
 					login_page.taskingLogin(username001, password001);
@@ -1128,385 +1128,385 @@ describe('tasking tests', function() {
 					var allFilterMenus = [ "allFilterLabels", "allFilterLabels" ];
 					describe('all filters label validation:  label 1 & label 2', function() {
 						var allFilterSelections = [ "label 1", "label 2" ];
-						it('all filters label validation:  label 1 task004 visible', function() {
+						it('all filters label validation:  label 1&2 task004 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task008 visible', function() {
+						it('all filters label validation:  label 1&2 task008 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task008Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task009 visible', function() {
+						it('all filters label validation:  label 1&2 task009 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task001 not visible', function() {
+						it('all filters label validation:  label 1&2 task001 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task002 not visible', function() {
+						it('all filters label validation:  label 1&2 task002 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task003 not visible', function() {
+						it('all filters label validation:  label 1&2 task003 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task005 not visible', function() {
+						it('all filters label validation:  label 1&2 task005 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task006 not visible', function() {
+						it('all filters label validation:  label 1&2 task006 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task007 not visible', function() {
+						it('all filters label validation:  label 1&2 task007 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task010 not visible', function() {
+						it('all filters label validation:  label 1&2 task010 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task011 not visible', function() {
+						it('all filters label validation:  label 1&2 task011 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task012 not visible', function() {
+						it('all filters label validation:  label 1&2 task012 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task013 not visible', function() {
+						it('all filters label validation:  label 1&2 task013 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task014 not visible', function() {
+						it('all filters label validation:  label 1&2 task014 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task015 not visible', function() {
+						it('all filters label validation:  label 1&2 task015 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 						});
 					});
 					describe('all filters label validation:  label 1 & label 3', function() {
 						var allFilterSelections = [ "label 1", "label 3" ];
-						it('all filters label validation:  label 1 task004 visible', function() {
+						it('all filters label validation:  label 1&3 task004 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task008 visible', function() {
+						it('all filters label validation:  label 1&3 task008 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task008Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task009 visible', function() {
+						it('all filters label validation:  label 1&3 task009 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task001 not visible', function() {
+						it('all filters label validation:  label 1&3 task001 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task002 not visible', function() {
+						it('all filters label validation:  label 1&3 task002 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task003 not visible', function() {
+						it('all filters label validation:  label 1&3 task003 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task003Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task005 not visible', function() {
+						it('all filters label validation:  label 1&3 task005 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task006 not visible', function() {
+						it('all filters label validation:  label 1&3 task006 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task007 not visible', function() {
+						it('all filters label validation:  label 1&3 task007 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task010 not visible', function() {
+						it('all filters label validation:  label 1&3 task010 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task011 not visible', function() {
+						it('all filters label validation:  label 1&3 task011 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task012 not visible', function() {
+						it('all filters label validation:  label 1&3 task012 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task013 not visible', function() {
+						it('all filters label validation:  label 1&3 task013 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task014 not visible', function() {
+						it('all filters label validation:  label 1&3 task014 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task015 not visible', function() {
+						it('all filters label validation:  label 1&3 task015 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 						});
 					});
 					describe('all filters label validation:  label 1 & label 4', function() {
 						var allFilterSelections = [ "label 1", "label 4" ];
-						it('all filters label validation:  label 1 task004 visible', function() {
+						it('all filters label validation:  label 1&4 task004 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task008 visible', function() {
+						it('all filters label validation:  label 1&4 task008 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task008Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task009 visible', function() {
+						it('all filters label validation:  label 1&4 task009 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task001 not visible', function() {
+						it('all filters label validation:  label 1&4 task001 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task002 not visible', function() {
+						it('all filters label validation:  label 1&4 task002 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task003 not visible', function() {
+						it('all filters label validation:  label 1&4 task003 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task003Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task005 not visible', function() {
+						it('all filters label validation:  label 1&4 task005 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task006 not visible', function() {
+						it('all filters label validation:  label 1&4 task006 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task007 not visible', function() {
+						it('all filters label validation:  label 1&4 task007 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task010 not visible', function() {
+						it('all filters label validation:  label 1&4 task010 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task011 not visible', function() {
+						it('all filters label validation:  label 1&4 task011 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task012 not visible', function() {
+						it('all filters label validation:  label 1&4 task012 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task013 not visible', function() {
+						it('all filters label validation:  label 1&4 task013 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task014 not visible', function() {
+						it('all filters label validation:  label 1&4 task014 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task015 not visible', function() {
+						it('all filters label validation:  label 1&4 task015 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 						});
 					});
 					describe('all filters label validation:  label 2 & label 3', function() {
 						var allFilterSelections = [ "label 2", "label 3" ];
-						it('all filters label validation:  label 1 task004 visible', function() {
+						it('all filters label validation:  label 2&3 task004 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task008 visible', function() {
+						it('all filters label validation:  label 2&3 task008 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task008Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task009 visible', function() {
+						it('all filters label validation:  label 2&3 task009 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task001 not visible', function() {
+						it('all filters label validation:  label 2&3 task001 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task002 not visible', function() {
+						it('all filters label validation:  label 2&3 task002 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task003 not visible', function() {
+						it('all filters label validation:  label 2&3 task003 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task003Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task005 not visible', function() {
+						it('all filters label validation:  label 2&3 task005 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task006 not visible', function() {
+						it('all filters label validation:  label 2&3 task006 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task007 not visible', function() {
+						it('all filters label validation:  label 2&3 task007 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task010 not visible', function() {
+						it('all filters label validation:  label 2&3 task010 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task011 not visible', function() {
+						it('all filters label validation:  label 2&3 task011 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task012 not visible', function() {
+						it('all filters label validation:  label 2&3 task012 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task013 not visible', function() {
+						it('all filters label validation:  label 2&3 task013 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task014 not visible', function() {
+						it('all filters label validation:  label 2&3 task014 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task015 not visible', function() {
+						it('all filters label validation:  label 2&3 task015 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 						});
 					});
 					describe('all filters label validation:  label 2 & label 4', function() {
 						var allFilterSelections = [ "label 2", "label 4" ];
-						it('all filters label validation:  label 1 task004 visible', function() {
+						it('all filters label validation:  label 2&4 task004 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task008 visible', function() {
+						it('all filters label validation:  label 2&4 task008 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task009 visible', function() {
+						it('all filters label validation:  label 2&4 task009 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task001 not visible', function() {
+						it('all filters label validation:  label 2&4 task001 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task002 not visible', function() {
+						it('all filters label validation:  label 2&4 task002 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task003 not visible', function() {
+						it('all filters label validation:  label 2&4 task003 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task003Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task005 not visible', function() {
+						it('all filters label validation:  label 2&4 task005 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task006 not visible', function() {
+						it('all filters label validation:  label 2&4 task006 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task007 not visible', function() {
+						it('all filters label validation:  label 2&4 task007 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task010 not visible', function() {
+						it('all filters label validation:  label 2&4 task010 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task011 not visible', function() {
+						it('all filters label validation:  label 2&4 task011 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task012 not visible', function() {
+						it('all filters label validation:  label 2&4 task012 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task013 not visible', function() {
+						it('all filters label validation:  label 2&4 task013 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task014 not visible', function() {
+						it('all filters label validation:  label 2&4 task014 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task015 not visible', function() {
+						it('all filters label validation:  label 2&4 task015 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 						});
 					});
 					describe('all filters label validation:  label 3 & label 4', function() {
 						var allFilterSelections = [ "label 3", "label 4" ];
-						it('all filters label validation:  label 1 task004 visible', function() {
+						it('all filters label validation:  label 3&4 task004 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task008 visible', function() {
+						it('all filters label validation:  label 3&4 task008 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task008Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task009 visible', function() {
+						it('all filters label validation:  label 3&4 task009 visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task001 not visible', function() {
+						it('all filters label validation:  label 3&4 task001 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task002 not visible', function() {
+						it('all filters label validation:  label 3&4 task002 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task003 not visible', function() {
+						it('all filters label validation:  label 3&4 task003 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task003Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task005 not visible', function() {
+						it('all filters label validation:  label 3&4 task005 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task006 not visible', function() {
+						it('all filters label validation:  label 3&4 task006 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task007 not visible', function() {
+						it('all filters label validation:  label 3&4 task007 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
 						});
-						it('all filters label validation:  label 1 task010 not visible', function() {
+						it('all filters label validation:  label 3&4 task010 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task011 not visible', function() {
+						it('all filters label validation:  label 3&4 task011 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task012 not visible', function() {
+						it('all filters label validation:  label 3&4 task012 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task013 not visible', function() {
+						it('all filters label validation:  label 3&4 task013 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task014 not visible', function() {
+						it('all filters label validation:  label 3&4 task014 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
 						});
-						it('all filters label validation:  label 1 task015 not visible', function() {
+						it('all filters label validation:  label 3&4 task015 not visible', function() {
 							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 						});
 					});
 				});
 			});
-			xdescribe('all filters assignee validation', function() {
+			describe('all filters assignee validation', function() {
 				var allFilterMenus = [ "allFilterAssignee" ];
 
 				beforeEach(function() {
@@ -1516,23 +1516,23 @@ describe('tasking tests', function() {
 				});
 				describe('all filters assignee validation: test user 1', function() {
 					var allFilterSelections = [ "testuid1" ];
-					it('test user1 my tasks quick filter task003 visible', function() {
+					it('test user1 all filters assignee validation task003 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task003Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task004 visible', function() {
+					it('test user1 all filters assignee validation task004 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task005 visible', function() {
+					it('test user1 all filters assignee validation task005 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task005Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task006 visible', function() {
+					it('test user1 all filters assignee validation task006 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
 					});
-					it('test user1 my tasks quick filter task009 visible', function() {
+					it('test user1 all filters assignee validation task009 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
 					});
@@ -1577,71 +1577,806 @@ describe('tasking tests', function() {
 						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 					});
 				});
-				describe('all filters assignee validation: test user 1', function() {
+				describe('all filters assignee validation: test user 2', function() {
 					var allFilterSelections = [ "testuid2" ];
-					xit('test user1 my tasks quick filter task003 visible', function() {
+					it('test user2 my tasks quick filter task003 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task004 visible', function() {
+					it('test user2 my tasks quick filter task004 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task005 visible', function() {
+					it('test user2 my tasks quick filter task005 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task006 visible', function() {
+					it('test user2 my tasks quick filter task006 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 					});
-					xit('test user1 my tasks quick filter task009 visible', function() {
+					it('test user2 my tasks quick filter task009 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task010 visible', function() {
+					it('test user2 my tasks quick filter task010 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task011 visible', function() {
+					it('test user2 my tasks quick filter task011 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task001 not visible', function() {
+					it('test user2 my tasks quick filter task001 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task001Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task002 not visible', function() {
+					it('test user2 my tasks quick filter task002 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task002Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task007 not visible', function() {
+					it('test user2 my tasks quick filter task007 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
 					});
-					xit('test user1 my tasks quick filter task008 not visible', function() {
+					it('test user2 my tasks quick filter task008 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task008Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task012 not visible', function() {
+					it('test user2 my tasks quick filter task012 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task012Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task013 not visible', function() {
+					it('test user2 my tasks quick filter task013 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task013Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task014 not visible', function() {
+					it('test user2 my tasks quick filter task014 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task014Obj, "Open");
 					});
-					xit('test user1 my tasks quick filter task015 not visible', function() {
+					it('test user2 my tasks quick filter task015 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task015Obj, "Open");
 					});
 				});
 			});
+			describe('all filters status validation', function() {
+				var allFilterMenus = [ "allFilterStatus" ];
+
+				beforeEach(function() {
+					login_page.isLoginPageLoaded();
+					login_page.taskingLogin(username001, password001);
+					tasking_main_page.isMainPageLoaded();
+				});
+				describe('all filters status validation: not started', function() {
+					var allFilterSelections = [ "Not Started" ];
+					it('all filters status validation not started task001 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+					});
+					it('all filters status validation not started task002 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('all filters status validation not started task003 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('all filters status validation not started task004 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+					});
+					it('all filters status validation not started task005 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+					});
+					it('all filters status validation not started task006 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('all filters status validation not started task007 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('all filters status validation not started task008 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('all filters status validation not started task009 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+					});
+					it('all filters status validation not started task010 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('all filters status validation not started task011 visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+					});
+					it('all filters status validation not started task011 not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Closed");
+					});
+					it('all filters status validation not started task012 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('all filters status validation not started task013 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('all filters status validation not started task014 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('all filters status validation not started task015 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+				describe('all filters status validation: in progress', function() {
+					var allFilterSelections = [ "In Progress" ];
+					it('all filters status validation in progress task001 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+					});
+					it('all filters status validation in progress task002  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+					});
+					it('all filters status validation in progress task002  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Closed");
+					});
+					it('all filters status validation in progress task003  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+					});
+					it('all filters status validation in progress task003  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Closed");
+					});
+					it('all filters status validation in progress task004  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+					});
+					it('all filters status validation in progress task004  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task004Obj, "Closed");
+					});
+					it('all filters status validation in progress task005  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+					});
+					it('all filters status validation in progress task0025 not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Closed");
+					});
+					it('all filters status validation in progress task006 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('all filters status validation in progress task007 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('all filters status validation in progress task008  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+					});
+					it('all filters status validation in progress task008  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Closed");
+					});
+					it('all filters status validation in progress task009  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+					});
+					it('all filters status validation in progress task009  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task009Obj, "Closed");
+					});
+					it('all filters status validation in progress task010  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+					});
+					it('all filters status validation in progress task010  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Closed");
+					});
+					it('all filters status validation in progress task011 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('all filters status validation in progress task012  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+					});
+					it('all filters status validation in progress task012  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Closed");
+					});
+					it('all filters status validation in progress task013  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+					});
+					it('all filters status validation in progress task013  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Closed");
+					});
+					it('all filters status validation in progress task014  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+					});
+					it('all filters status validation in progress task014  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Closed");
+					});
+					it('all filters status validation in progress task015  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+					});
+					it('all filters status validation in progress task015  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Closed");
+					});
+				});
+				describe('all filters status validation: on hold', function() {
+					var allFilterSelections = [ "On Hold" ];
+					it('all filters status validation on hold task001 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task001Obj, "Open");
+					});
+					it('all filters status validation on hold task001  not visible in closed queue', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task001Obj, "Closed");
+					});
+					it('all filters status validation on hold task002  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('all filters status validation on hold task003  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('all filters status validation on hold task004  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+					});
+					it('all filters status validation on hold task005  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+					});
+					it('all filters status validation on hold task006 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('all filters status validation on hold task007 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('all filters status validation on hold task008  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('all filters status validation on hold task009 not  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+					});
+					it('all filters status validation on hold task010  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('all filters status validation on hold task011 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('all filters status validation on hold task012  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('all filters status validation on hold task013  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('all filters status validation on hold task014  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('all filters status validation on hold task015  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+				describe('all filters status validation: complete', function() {
+					var allFilterSelections = [ "Complete" ];
+					it('all filters status validation complete task001 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+					});
+					it('all filters status validation complete task002  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('all filters status validation complete task003  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('all filters status validation complete task004  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+					});
+					it('all filters status validation complete task005  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+					});
+					it('all filters status validation complete task006 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('all filters status validation complete task007 visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Open");
+					});
+					it('all filters status validation complete task008  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('all filters status validation complete task009 not  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+					});
+					it('all filters status validation complete task010  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('all filters status validation complete task011 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('all filters status validation complete task012  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('all filters status validation complete task013  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('all filters status validation complete task014  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('all filters status validation complete task015  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+				describe('all filters status validation: canceled', function() {
+					var allFilterSelections = [ "Canceled" ];
+					it('all filters status validation canceled task001 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+					});
+					it('all filters status validation canceled task002  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('all filters status validation canceled task003  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('all filters status validation canceled task004  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+					});
+					it('all filters status validation canceled task005  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+					});
+					it('all filters status validation canceled task006 visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Open");
+					});
+					it('all filters status validation canceled task007 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('all filters status validation canceled task008  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('all filters status validation canceled task009 not  visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+					});
+					it('all filters status validation canceled task010  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('all filters status validation canceled task011 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('all filters status validation canceled task012  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('all filters status validation canceled task013  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('all filters status validation canceled task014  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('all filters status validation canceled task015  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+			});
+			describe('all filters more options validation', function() {
+				var allFilterMenus = [ "allFilterMoreO" ];
+				describe('all filters more options validation:  starred', function() {
+					var allFilterSelections = [ "Tasks I Starred" ];
+					describe('all filters more options validation:  starred by test user 1', function() {
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username001, password001);
+							tasking_main_page.isMainPageLoaded();
+						});
+						it('test user1 tasks I starred all filters more options task004 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task010 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task001 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task002 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task003 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task015 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task005 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task006 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+						});
+						it('test user1 tasks I starred all filters more options task007 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+						});
+						it('test user1 tasks I starred all filters more options task008 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task009 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task011 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task012 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task013 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task014 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+						});
+					});
+					describe('all filters more options validation:  starred by test user 2', function() {
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username002, password002);
+							tasking_main_page.isMainPageLoaded();
+						});
+						it('test user1 tasks I starred all filters more options task004 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task010 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task001 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task002 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task003 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task015 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task005 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task006 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+						});
+						it('test user1 tasks I starred all filters more options task007 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+						});
+						it('test user1 tasks I starred all filters more options task008 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task009 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task011 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task012 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task013 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+						});
+						it('test user1 tasks I starred all filters more options task014 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+						});
+					});
+				});
+				describe('all filters more options validation: i created', function() {
+					var allFilterSelections = [ "Tasks I Created" ];
+					describe('all filters more options validation: created by test user 1', function() {
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username001, password001);
+							tasking_main_page.isMainPageLoaded();
+						});
+						it('test user1 tasks I created all filters more options task001 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task001Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task002 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task003 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task004 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task005 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task006 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+						});
+						it('test user1 tasks I created all filters more options task007 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+						});
+						it('test user1 tasks I created all filters more options task008 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task009 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task010 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task011 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task012 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task013 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task014 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+						});
+						it('test user1 tasks I created all filters more options task015 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+						});
+					});
+					describe('all filters more options validation:  created by test user 2', function() {
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username002, password002);
+							tasking_main_page.isMainPageLoaded();
+						});
+						it('test user2 tasks I created all filters more options task001 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task002 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task003 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task004 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task005 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task006 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+						});
+						it('test user2 tasks I created all filters more options task007 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+						});
+						it('test user2 tasks I created all filters more options task008 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task009 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task010 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task011 not visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task012 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task013 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task014 visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+						});
+						it('test user2 tasks I created all filters more options task015  visible', function() {
+							tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+							tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+						});
+					});
+				});
+				
+				describe('all filters more options validation: blocked', function() {
+					var allFilterSelections = [ "Blocked Tasks" ];
+					beforeEach(function() {
+						login_page.isLoginPageLoaded();
+						login_page.taskingLogin(username001, password001);
+						tasking_main_page.isMainPageLoaded();
+					});
+					it('blocked tasks all filters more options task001 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+					});
+					it('blocked tasks all filters more options task002 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('blocked tasks all filters more options task003 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('blocked tasks all filters more options task004 not not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+					});
+					it('blocked tasks all filters more options task005 visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+					});
+					it('blocked tasks all filters more options task006 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('blocked tasks all filters more options task007 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('blocked tasks all filters more options task008 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('blocked tasks all filters more options task009 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+					});
+					it('blocked tasks all filters more options task010 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('blocked tasks all filters more options task011 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('blocked tasks all filters more options task012 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('blocked tasks all filters more options task013 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('blocked tasks all filters more options task014 not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('blocked tasks all filters more options task015  not visible', function() {
+						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+			});
 		});
+		describe('edit task details tests', function() {
+			beforeEach(function() {
+				login_page.isLoginPageLoaded();
+				login_page.taskingLogin(username001, password001);
+				tasking_main_page.isMainPageLoaded();
+			});
+			it('comment check', function() {
+				tasking_main_page.checkComment(1, task010Obj);
+			});
+		});
+		
 	});
 
 	xdescribe('add task tests', function() {
@@ -1664,7 +2399,7 @@ describe('tasking tests', function() {
 				login_page.taskingLogin(username001, password001);
 				tasking_main_page.checkTaskDetails(taskEntry, addTaskTest);
 			});
-			xit('edit task details', function() {
+			it('edit task details', function() {
 				var addTaskTest = taskInformation.addTaskData();
 				var editTaskTest = taskInformation.editTaskValues(taskEdit, "not started", addTaskTest);
 				tasking_main_page.addTask(taskEntry, addTaskTest);
@@ -1678,7 +2413,7 @@ describe('tasking tests', function() {
 				tasking_main_page.checkTaskDetails(taskEdit, editTaskTest);
 			});
 
-			xit('add comment', function() {
+			it('add comment', function() {
 				var addTaskTest = taskInformation.addTaskData();
 				var commentTaskTest = taskInformation.editTaskValues([ "" ], "not started", addTaskTest);
 				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"] + " commentTaskTest summary = "
@@ -1690,7 +2425,7 @@ describe('tasking tests', function() {
 				tasking_main_page.addComment(commentTaskTest, commentTaskTest["existingCommentText"]);
 				tasking_main_page.logOut();
 				login_page.taskingLogin(username001, password001);
-				tasking_main_page.checkComment(commentTaskTest);
+				tasking_main_page.checkComment(0, commentTaskTest);
 			});
 
 		});

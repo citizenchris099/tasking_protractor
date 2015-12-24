@@ -176,8 +176,8 @@ var addCommentButton = function() {
 	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("taskDetailsCommentButton"));
 };
 
-var commentDetails = function(child) {
-	return element(locatorMap.get("taskDetailsParent")).element(locatorMap.get("existingCommentParent")).element(
+var commentDetails = function(index, child) {
+	return element(locatorMap.get("taskDetailsParent")).all(locatorMap.get("existingCommentParent")).get(index).element(
 			locatorMap.get(child))
 }
 
@@ -376,11 +376,11 @@ var addCommentToTask = function(value) {
 	addCommentButton().click();
 };
 
-var commentInfoValidation = function(obj) {
+var commentInfoValidation = function(index, obj) {
 	var value = [ "existingCommentAuthor", "existingCommentDateTime", "existingCommentText" ];
 	for (var count = 0; count < value.length; count++) {
 		(function(passedInCount) {
-			commentDetails(value[passedInCount]).getText().then(function(text) {
+			commentDetails(index, value[passedInCount]).getText().then(function(text) {
 				var array = text.split(",");
 				expect(array[0]).toEqual(obj[value[passedInCount]]);
 			}, function(err) {
@@ -595,9 +595,9 @@ tasking_main_page.prototype.addComment = function(obj, value) {
 	addCommentToTask(value);
 };
 
-tasking_main_page.prototype.checkComment = function(obj) {
+tasking_main_page.prototype.checkComment = function(index, obj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
-	commentInfoValidation(obj);
+	commentInfoValidation(index, obj);
 };
 
 /**

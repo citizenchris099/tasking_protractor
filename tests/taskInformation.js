@@ -183,7 +183,7 @@ taskInformation.prototype.task010 = function() {
 	task010.addTaskAssignee = "Test User1";
 	task010.existingCommentAuthor = "Test User2";
 	task010.existingCommentDateTime = displayDate(0);
-	task010.existingCommentText = "a really well thought out test comment";
+	task010.existingCommentText = "a really well thought out test comment 2";
 	task010.addTaskDescription = "a great description 2";
 	return task010;
 };
