@@ -14,6 +14,7 @@ var task007Obj = taskInformation.task007();
 var task008Obj = taskInformation.task008();
 var task009Obj = taskInformation.task009();
 var task010Obj = taskInformation.task010();
+var task010ObjClone = taskInformation.task010Clone();
 var task011Obj = taskInformation.task011();
 var task012Obj = taskInformation.task012();
 var task013Obj = taskInformation.task013();
@@ -127,6 +128,14 @@ describe('tasking tests', function() {
 				tasking_main_page.checkTaskDetails(task010Entry, task010Obj);
 			});
 
+			it('comment check: task010 first comment verification', function() {
+				tasking_main_page.checkComment(0, task010Obj);
+			});
+
+			it('comment check:  task010 second comment verification', function() {
+				tasking_main_page.checkComment(1, task010ObjClone);
+			});
+
 			it('fixture data task011 task detail verification', function() {
 				tasking_main_page.checkTaskInQueue(task011Obj, "Open");
 				tasking_main_page.checkTaskDetails(task011Entry, task011Obj);
@@ -153,91 +162,454 @@ describe('tasking tests', function() {
 			});
 		});
 
-		xdescribe('status validation', function() {
+		describe('task queue validation', function() {
 			beforeEach(function() {
 				login_page.isLoginPageLoaded();
 				login_page.taskingLogin(username001, password001);
 				tasking_main_page.isMainPageLoaded();
 			});
-			it('fixture data task001 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task001Obj, "Open");
-				tasking_main_page.checkTaskStatus(task001Obj);
+			xdescribe('status validation', function() {
+				it('fixture data task001 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task001Obj, "Open");
+					tasking_main_page.checkTaskStatus(task001Obj);
+				});
+
+				it('fixture data task002 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+					tasking_main_page.checkTaskStatus(task002Obj);
+				});
+
+				it('fixture data task003 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+					tasking_main_page.checkTaskStatus(task003Obj);
+				});
+
+				it('fixture data task004 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+					tasking_main_page.checkTaskStatus(task004Obj);
+				});
+
+				it('fixture data task005 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+					tasking_main_page.checkTaskStatus(task005Obj);
+				});
+
+				it('fixture data task008 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+					tasking_main_page.checkTaskStatus(task008Obj);
+				});
+
+				it('fixture data task009 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+					tasking_main_page.checkTaskStatus(task009Obj);
+				});
+
+				it('fixture data task010 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+					tasking_main_page.checkTaskStatus(task010Obj);
+				});
+
+				it('fixture data task011 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+					tasking_main_page.checkTaskStatus(task011Obj);
+				});
+
+				it('fixture data task012 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+					tasking_main_page.checkTaskStatus(task012Obj);
+				});
+
+				it('fixture data task013 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+					tasking_main_page.checkTaskStatus(task013Obj);
+				});
+
+				it('fixture data task014 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+					tasking_main_page.checkTaskStatus(task014Obj);
+				});
+
+				it('fixture data task015 status verification', function() {
+					tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+					tasking_main_page.checkTaskStatus(task015Obj);
+				});
 			});
 
-			it('fixture data task002 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task002Obj, "Open");
-				tasking_main_page.checkTaskStatus(task002Obj);
-			});
+			xdescribe('task flag validation', function() {
+				xit('fixture data task005 blocked flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+					tasking_main_page.checkTaskFlag(task005Obj, true);
+				});
 
-			it('fixture data task003 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task003Obj, "Open");
-				tasking_main_page.checkTaskStatus(task003Obj);
-			});
+				xit('comment check: task010 comment flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+					tasking_main_page.checkTaskCommentFlags(task010Obj, 2, true);
+				});
 
-			it('fixture data task004 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task004Obj, "Open");
-				tasking_main_page.checkTaskStatus(task004Obj);
-			});
+				xit('fixture data task006 canceled flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+					tasking_main_page.checkTaskFlag(task006Obj, true);
+				});
 
-			it('fixture data task005 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task005Obj, "Open");
-				tasking_main_page.checkTaskFlag(task005Obj, true);
-				tasking_main_page.checkTaskStatus(task005Obj);
-			});
+				xit('fixture data task007 complete flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+					tasking_main_page.checkTaskFlag(task007Obj, true);
+				});
 
-			it('fixture data task006 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
-				tasking_main_page.checkTaskFlag(task006Obj, true);
-			});
+				it('fixture data task002 over due flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+					tasking_main_page.checkTaskOverDueFlags(task002Obj, "a day", true);
+				});
 
-			it('fixture data task007 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
-				tasking_main_page.checkTaskFlag(task007Obj, true);
-			});
+				it('fixture data task013 over due flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+					tasking_main_page.checkTaskOverDueFlags(task013Obj, "2 days", true);
+				});
 
-			it('fixture data task008 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task008Obj, "Open");
-				tasking_main_page.checkTaskStatus(task008Obj);
-			});
+				it('fixture data task014 over due flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+					tasking_main_page.checkTaskOverDueFlags(task014Obj, "7 days", true);
+				});
 
-			it('fixture data task009 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task009Obj, "Open");
-				tasking_main_page.checkTaskStatus(task009Obj);
-			});
-
-			it('fixture data task010 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task010Obj, "Open");
-				tasking_main_page.checkTaskStatus(task010Obj);
-			});
-
-			it('fixture data task011 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task011Obj, "Open");
-				tasking_main_page.checkTaskStatus(task011Obj);
-			});
-
-			it('fixture data task012 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task012Obj, "Open");
-				tasking_main_page.checkTaskStatus(task012Obj);
-			});
-
-			it('fixture data task013 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task013Obj, "Open");
-				tasking_main_page.checkTaskStatus(task013Obj);
-			});
-
-			it('fixture data task014 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task014Obj, "Open");
-				tasking_main_page.checkTaskStatus(task014Obj);
-			});
-
-			it('fixture data task015 status verification', function() {
-				tasking_main_page.checkTaskInQueue(task015Obj, "Open");
-				tasking_main_page.checkTaskStatus(task015Obj);
+				it('fixture data task015 over due flag verification', function() {
+					tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+					tasking_main_page.checkTaskOverDueFlags(task015Obj, "a month", true);
+				});
 			});
 
 		});
 		xdescribe('filter validation', function() {
-			xdescribe('my tasks quick filter validation', function() {
+			describe('search filter validation', function() {
+				beforeEach(function() {
+					login_page.isLoginPageLoaded();
+					login_page.taskingLogin(username001, password001);
+					tasking_main_page.isMainPageLoaded();
+				});
+				describe('search filter validation:  summary', function() {
+					describe('search filter task001 summary', function() {
+						it('search filter task001 summary task001 visible', function() {
+							tasking_main_page.checkTaskInQueue(task001Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+						});
+						it('search filter task001 summary task002 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+						});
+						it('search filter task001 summary task003 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+						});
+						it('search filter task001 summary task004 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
+						});
+						it('search filter task001 summary task005 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+						});
+						it('search filter task001 summary task006 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+							tasking_main_page.checkTaskNotInQueue(task006Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+						});
+						it('search filter task001 summary task007 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+							tasking_main_page.checkTaskNotInQueue(task007Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+						});
+						it('search filter task001 summary task008 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+						});
+						it('search filter task001 summary task009 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
+						});
+						it('search filter task001 summary task010 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+						});
+						it('search filter task001 summary task011 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+						});
+						it('search filter task001 summary task012 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+						});
+						it('search filter task001 summary task013 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+						});
+						it('search filter task001 summary task014 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+						});
+						it('search filter task001 summary task015 not visible', function() {
+							tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+							tasking_main_page.useSearchFilter(task001Obj, task001Obj["addTaskSummary"]);
+							tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+						});
+					});
+				});
+				describe('search filter validation:  description', function() {
+					it('search filter task004:  description ', function() {
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTaskDescription"]);
+					});
+
+					it('search filter task009:  description ', function() {
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+					});
+
+					it('search filter task004 & task009:  description ', function() {
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+					});
+					it('search filter description task002 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('search filter description task003 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('search filter description task005 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+					});
+					it('search filter description task006 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('search filter description task007 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('search filter description task008 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('search filter description task010 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('search filter description task011 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('search filter description task012 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('search filter description task013 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('search filter description task014 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('search filter description task015 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTaskDescription"]);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+				describe('search filter validation:  location', function() {
+					it('search filter task004:  description ', function() {
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+					});
+
+					it('search filter task009:  location ', function() {
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTasklocation"]);
+					});
+
+					it('search filter task004 & task009:  location ', function() {
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, task009Obj["addTasklocation"]);
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+					});
+					
+					it('search filter location task002 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('search filter location task003 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('search filter location task005 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+					});
+					it('search filter location task006 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('search filter location task007 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('search filter location task008 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
+					});
+					it('search filter location task010 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('search filter location task011 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('search filter location task012 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('search filter location task013 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('search filter location task014 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('search filter location task015 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, task004Obj["addTasklocation"]);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+				describe('search filter validation:  label', function() {
+					var labelSearch = task004Obj["labelEntry"]
+					it('search filter task004:  description ', function() {
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						tasking_main_page.useSearchFilter(task004Obj, labelSearch[0]);
+					});
+
+					it('search filter task009:  description ', function() {
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+					});
+
+					it('search filter task004 & task009:  description ', function() {
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskInQueue(task004Obj, "Open");
+						tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+					});
+					it('search filter location task002 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task002Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
+					});
+					it('search filter location task003 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task003Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
+					});
+					it('search filter location task005 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task005Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
+					});
+					it('search filter location task006 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task006Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
+					});
+					it('search filter location task007 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
+					});
+					it('search filter location task008 visible', function() {
+						tasking_main_page.checkTaskInQueue(task008Obj, "Open");
+						tasking_main_page.useSearchFilter(task008Obj, labelSearch[0]);
+					});
+					it('search filter location task010 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task010Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
+					});
+					it('search filter location task011 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task011Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
+					});
+					it('search filter location task012 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task012Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
+					});
+					it('search filter location task013 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task013Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
+					});
+					it('search filter location task014 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task014Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
+					});
+					it('search filter location task015 not visible', function() {
+						tasking_main_page.checkTaskInQueue(task015Obj, "Open");
+						tasking_main_page.useSearchFilter(task009Obj, labelSearch[0]);
+						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
+					});
+				});
+
+			});
+			describe('my tasks quick filter validation', function() {
 				describe('my tasks quick filter validation:  test user1', function() {
 					beforeEach(function() {
 						login_page.isLoginPageLoaded();
@@ -1536,106 +1908,106 @@ describe('tasking tests', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task009Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task010 visible', function() {
+					it('test user1 all filters assignee validation task010 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task010Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task011 visible', function() {
+					it('test user1 all filters assignee validation task011 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task011Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task001 not visible', function() {
+					it('test user1 all filters assignee validation task001 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task002 not visible', function() {
+					it('test user1 all filters assignee validation task002 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task002Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task007 not visible', function() {
+					it('test user1 all filters assignee validation task007 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task007Obj, "Closed");
 					});
-					it('test user1 my tasks quick filter task008 not visible', function() {
+					it('test user1 all filters assignee validation task008 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task008Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task012 not visible', function() {
+					it('test user1 all filters assignee validation task012 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task012Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task013 not visible', function() {
+					it('test user1 all filters assignee validation task013 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task013Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task014 not visible', function() {
+					it('test user1 all filters assignee validation task014 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task014Obj, "Open");
 					});
-					it('test user1 my tasks quick filter task015 not visible', function() {
+					it('test user1 all filters assignee validation task015 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task015Obj, "Open");
 					});
 				});
 				describe('all filters assignee validation: test user 2', function() {
 					var allFilterSelections = [ "testuid2" ];
-					it('test user2 my tasks quick filter task003 visible', function() {
+					it('test user2 all filters assignee validation task003 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task003Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task004 visible', function() {
+					it('test user2 all filters assignee validation task004 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task004Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task005 visible', function() {
+					it('test user2 all filters assignee validation task005 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task005Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task006 visible', function() {
+					it('test user2 all filters assignee validation task006 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task006Obj, "Closed");
 					});
-					it('test user2 my tasks quick filter task009 visible', function() {
+					it('test user2 all filters assignee validation task009 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task009Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task010 visible', function() {
+					it('test user2 all filters assignee validation task010 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task010Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task011 visible', function() {
+					it('test user2 all filters assignee validation task011 visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskNotInQueue(task011Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task001 not visible', function() {
+					it('test user2 all filters assignee validation task001 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task001Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task002 not visible', function() {
+					it('test user2 all filters assignee validation task002 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task002Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task007 not visible', function() {
+					it('test user2 all filters assignee validation task007 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task007Obj, "Closed");
 					});
-					it('test user2 my tasks quick filter task008 not visible', function() {
+					it('test user2 all filters assignee validation task008 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task008Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task012 not visible', function() {
+					it('test user2 all filters assignee validation task012 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task012Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task013 not visible', function() {
+					it('test user2 all filters assignee validation task013 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task013Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task014 not visible', function() {
+					it('test user2 all filters assignee validation task014 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task014Obj, "Open");
 					});
-					it('test user2 my tasks quick filter task015 not visible', function() {
+					it('test user2 all filters assignee validation task015 not visible', function() {
 						tasking_main_page.useAllFilters(allFilterMenus, allFilterSelections);
 						tasking_main_page.checkTaskInQueue(task015Obj, "Open");
 					});
@@ -2295,7 +2667,7 @@ describe('tasking tests', function() {
 						});
 					});
 				});
-				
+
 				describe('all filters more options validation: blocked', function() {
 					var allFilterSelections = [ "Blocked Tasks" ];
 					beforeEach(function() {
@@ -2366,17 +2738,29 @@ describe('tasking tests', function() {
 				});
 			});
 		});
-		describe('edit task details tests', function() {
+		describe('edit task details tests > ', function() {
 			beforeEach(function() {
 				login_page.isLoginPageLoaded();
 				login_page.taskingLogin(username001, password001);
 				tasking_main_page.isMainPageLoaded();
 			});
-			it('comment check', function() {
-				tasking_main_page.checkComment(1, task010Obj);
+			describe('edit task details:  summary > ', function() {
+				var summaryEdit = [ "taskDetailsSummary"];
+				var task001Edit = taskInformation.editTaskValues(taskEdit, "not started", task001Obj);
+				it('summary edit original not visible in task queue', function() {
+					tasking_main_page.checkTaskInQueue(task001Obj, "Open");
+					tasking_main_page.editTaskDetails(summaryEdit, task001Obj, task001Edit);
+					tasking_main_page.checkTaskNotInQueue(task001Obj, "Open");
+				});
+				it('summary edit visible in task queue', function() {
+					tasking_main_page.checkTaskInQueue(task001Edit, "Open");
+				});
+				it('summary edit visible in task details', function() {
+					tasking_main_page.checkTaskDetails(summaryEdit, task001Edit);
+				});
 			});
 		});
-		
+
 	});
 
 	xdescribe('add task tests', function() {
@@ -2413,7 +2797,7 @@ describe('tasking tests', function() {
 				tasking_main_page.checkTaskDetails(taskEdit, editTaskTest);
 			});
 
-			it('add comment', function() {
+			xit('add comment', function() {
 				var addTaskTest = taskInformation.addTaskData();
 				var commentTaskTest = taskInformation.editTaskValues([ "" ], "not started", addTaskTest);
 				console.log("addTaskTest summary = " + addTaskTest["addTaskSummary"] + " commentTaskTest summary = "

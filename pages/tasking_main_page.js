@@ -69,6 +69,11 @@ locatorMap.set("taskComplete", by.xpath(".//div[contains(@class,'mod-complete')]
 locatorMap.set("taskBlocked", by.xpath(".//i[contains(@class,'scicon-alert-octagon')]"));
 locatorMap.set("taskCanceled", by.xpath(".//i[contains(@class,'scicon-block-helper')]"));
 locatorMap.set("taskStar", by.xpath(".//div[@class='taskqueue-task-star']"));
+locatorMap.set("taskActivityFlags", by.xpath(".//div[@class='taskqueue-task-activity-flags']"));
+locatorMap.set("taskActivityFlagsCommentNumParent", by.xpath(".//li[@class='iconlist-text']"));
+locatorMap.set("taskCommentFlag", by.xpath(".//i[contains(@class,'scicon-comment-text-outline')]"));
+locatorMap.set("taskOverDueParent", by.xpath(".//div[@class='taskqueue-task-overdue']"));
+locatorMap.set("taskOverDueFlag", by.xpath(".//i[contains(@class,'scicon-clock-fast')]"));
 
 /**
  * locators: task details
@@ -276,22 +281,44 @@ var allFilterCountElement = function(value) {
 var taskFlag = function(value) {
 	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected"))
 			.element(locatorMap.get(value));
+};
+
+var taskOverDueFlag = function() {
+	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected")).element(
+			locatorMap.get("taskOverDueParent")).element(locatorMap.get("taskOverDueFlag"))
+};
+
+var taskOverDueText = function(value) {
+	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected")).element(
+			locatorMap.get("taskOverDueParent")).element(
+			by.xpath(".//span[contains(text(), '" + value + "')] [@class='taskqueue-task-overdue-text']"));
 }
+
+var commentCountFlag = function(value) {
+	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected")).element(
+			locatorMap.get("taskActivityFlags")).element(locatorMap.get("taskActivityFlagsCommentNumParent")).element(
+			by.xpath(".//span[contains(text(), '" + value + "')]"));
+};
+
+var commentFlag = function() {
+	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected")).element(
+			locatorMap.get("taskActivityFlags")).element(locatorMap.get("taskCommentFlag"));
+};
 
 var starTask = function() {
 	return element(locatorMap.get("taskListParent")).element(locatorMap.get("taskIsSelected")).element(
 			locatorMap.get("taskStar"));
-}
+};
 
 var taskQueueGroup = function(value) {
 	return element(locatorMap.get("taskListGroup")).element(
 			by.xpath(".//a[contains(text(), '" + value + "')] [contains(@class,'togglegroup-item-link ')]"));
-}
+};
 
 var activeTaskQueueGroup = function(value) {
 	return element(locatorMap.get("taskListGroup")).element(
 			by.xpath(".//a[contains(text(), '" + value + "')] [contains(@class,'is-active')]"));
-}
+};
 
 var taskInQueue = function(value) {
 	return basePage.findElement(locatorMap.get("taskListParent"), by.xpath("//span[contains(text(), '" + value
@@ -300,7 +327,7 @@ var taskInQueue = function(value) {
 
 var numberOfTaskInQueue = function(value) {
 	return element.all(by.xpath("//span[contains(text(), '" + value + "')] [@class='js-taskqueue-task-summary']"));
-}
+};
 
 var moreTaskElement = function() {
 	return basePage.findElement(locatorMap.get("moreTaskParent"), locatorMap.get("moreTaskButton"));
@@ -423,6 +450,22 @@ var selectTaskQueueGroup = function(value) {
 var checkTaskFlag = function(value, boolean) {
 	expect(taskFlag(value).isDisplayed()).toBe(boolean);
 };
+
+var checkCommentCountFlag = function(value, boolean) {
+	expect(commentCountFlag(value).isDisplayed()).toBe(boolean);
+};
+
+var checkCommentFlag = function(boolean) {
+	expect(commentFlag().isDisplayed()).toBe(boolean);
+};
+
+var checkTaskOverDueFlag = function(boolean){
+	expect(taskOverDueFlag().isDisplayed()).toBe(boolean);
+};
+
+var checkTaskOverDueText = function(value, boolean){
+	expect(taskOverDueText(value).isDisplayed()).toBe(boolean);
+}
 
 var clickMoreTasks = function(value, boolean) {
 	moreTaskElement().click().then(function() {
@@ -627,6 +670,18 @@ tasking_main_page.prototype.checkTaskFlag = function(obj, boolean) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	checkTaskFlag(obj["flag"], boolean);
 };
+
+tasking_main_page.prototype.checkTaskCommentFlags = function(obj, value, boolean) {
+	checkTaskDisplayed(obj["addTaskSummary"], true);
+	checkCommentCountFlag(value, boolean);
+	checkCommentFlag(boolean);
+};
+
+tasking_main_page.prototype.checkTaskOverDueFlags = function(obj, value, boolean){
+	checkTaskDisplayed(obj["addTaskSummary"], true);
+	checkTaskOverDueFlag(boolean);
+	checkTaskOverDueText(value, boolean);
+}
 
 /**
  * services: filters

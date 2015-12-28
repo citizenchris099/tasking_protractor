@@ -33,6 +33,56 @@ function taskData(addTaskSummary, addTaskDescription, addTasklocation, labelEntr
 	this.flag = flag;
 };
 
+function cloneTaskData(obj) {
+	return new taskData(obj["addTaskSummary"], obj["addTaskDescription"], obj["addTasklocation"], obj["labelEntry"],
+			obj["addTaskAssignee"], obj["addedDays"], obj["displayDate"]);
+};
+
+taskInformation.prototype.addTaskData = function() {
+	return new taskData(phraseGen.randomPhrase(), phraseGen.randomPhrase(), phraseGen.randomLocation(), [
+			phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel() ], user1,
+			days, tasking_main_page.displayDate(days));
+};
+
+taskInformation.prototype.editTaskValues = function(value, status, obj) {
+	var editTaskTest = cloneTaskData(obj);
+	for (var count = 0; count < value.length; count++) {
+		if (value[count] == "taskDetailsSummary") {
+			editTaskTest.taskDetailsSummary = phraseGen.randomPhrase();
+			;
+			editTaskTest.addTaskSummary = editTaskTest["taskDetailsSummary"];
+		} else if (value[count] == "taskDetailsDescription") {
+			editTaskTest.taskDetailsDescription = phraseGen.randomPhrase();
+			;
+			editTaskTest.addTaskDescription = editTaskTest["taskDetailsDescription"];
+		} else if (value[count] == "addTasklocation") {
+			editTaskTest.addTasklocation = phraseGen.randomLocation();
+			;
+		} else if (value[count] == "addedDays") {
+			editTaskTest.addedDays = daysEdit;
+		} else if (value[count] == "addTaskAssignee") {
+			editTaskTest.addTaskAssignee = user2;
+		} else if (value[count] == "labelEntry") {
+			editTaskTest.labelEntry = [ phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel(),
+					phraseGen.randomLabel() ];
+		}
+	}
+	editTaskTest.existingCommentAuthor = user1;
+	editTaskTest.existingCommentDateTime = tasking_main_page.displayDate(0);
+	editTaskTest.existingCommentText = comment;
+	editTaskTest.taskStatus = status;
+	if (editTaskTest["taskStatus"] == "blocked") {
+		editTaskTest.flag = "taskBlocked"
+	} else if (editTaskTest["taskStatus"] == "complete") {
+		editTaskTest.flag = "taskComplete"
+	} else if (editTaskTest["taskStatus"] == "canceled") {
+		editTaskTest.flag = "taskCanceled"
+	} else {
+	}
+
+	return editTaskTest;
+};
+
 taskInformation.prototype.task001Entry = function() {
 	return [ "addTaskSummary", "addTaskAssignee" ];
 };
@@ -172,7 +222,7 @@ taskInformation.prototype.task010Entry = function() {
 	return [ "addTaskSummary", "labelEntry", "addTasklocation", "addTaskAssignee", "addedDays", "addTaskDescription" ];
 };
 
-taskInformation.prototype.task010 = function() {
+var task010OBJ = function(){
 	var task010 = new taskData();
 	task010.addTaskSummary = "Task 010";
 	task010.addedDays = 2;
@@ -186,7 +236,20 @@ taskInformation.prototype.task010 = function() {
 	task010.existingCommentText = "a really well thought out test comment 2";
 	task010.addTaskDescription = "a great description 2";
 	return task010;
+}
+
+taskInformation.prototype.task010 = function() {
+	return task010OBJ();
 };
+
+taskInformation.prototype.task010Clone = function(){
+	var task010Clone = cloneTaskData(task010OBJ());
+	task010Clone.existingCommentAuthor = "Test User1";
+	task010Clone.existingCommentDateTime = displayDate(0);
+	task010Clone.existingCommentText = "a really well thought out test comment";
+	return task010Clone;
+	
+}
 
 taskInformation.prototype.task011Entry = function() {
 	return [ "addTaskSummary", "addTaskAssignee" ];
@@ -245,52 +308,6 @@ taskInformation.prototype.task015 = function() {
 	task015.taskStatus = "in progress";
 	task015.addTaskAssignee = "Test User2";
 	return task015;
-};
-
-taskInformation.prototype.addTaskData = function() {
-	return new taskData(phraseGen.randomPhrase(), phraseGen.randomPhrase(), phraseGen.randomLocation(), [
-			phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel() ], user1,
-			days, tasking_main_page.displayDate(days));
-};
-
-taskInformation.prototype.editTaskValues = function(value, status, obj) {
-	var editTaskTest = new taskData(obj["addTaskSummary"], obj["addTaskDescription"], obj["addTasklocation"],
-			obj["labelEntry"], obj["addTaskAssignee"], obj["addedDays"], obj["displayDate"]);
-	for (var count = 0; count < value.length; count++) {
-		if (value[count] == "taskDetailsSummary") {
-			editTaskTest.taskDetailsSummary = phraseGen.randomPhrase();
-			;
-			editTaskTest.addTaskSummary = editTaskTest["taskDetailsSummary"];
-		} else if (value[count] == "taskDetailsDescription") {
-			editTaskTest.taskDetailsDescription = phraseGen.randomPhrase();
-			;
-			editTaskTest.addTaskDescription = editTaskTest["taskDetailsDescription"];
-		} else if (value[count] == "addTasklocation") {
-			editTaskTest.addTasklocation = phraseGen.randomLocation();
-			;
-		} else if (value[count] == "addedDays") {
-			editTaskTest.addedDays = daysEdit;
-		} else if (value[count] == "addTaskAssignee") {
-			editTaskTest.addTaskAssignee = user2;
-		} else if (value[count] == "labelEntry") {
-			editTaskTest.labelEntry = [ phraseGen.randomLabel(), phraseGen.randomLabel(), phraseGen.randomLabel(),
-					phraseGen.randomLabel() ];
-		}
-	}
-	editTaskTest.existingCommentAuthor = user1;
-	editTaskTest.existingCommentDateTime = tasking_main_page.displayDate(0);
-	editTaskTest.existingCommentText = comment;
-	editTaskTest.taskStatus = status;
-	if (editTaskTest["taskStatus"] == "blocked") {
-		editTaskTest.flag = "taskBlocked"
-	} else if (editTaskTest["taskStatus"] == "complete") {
-		editTaskTest.flag = "taskComplete"
-	} else if (editTaskTest["taskStatus"] == "canceled") {
-		editTaskTest.flag = "taskCanceled"
-	} else {
-	}
-
-	return editTaskTest;
 };
 
 exports.taskInformation = new taskInformation();
