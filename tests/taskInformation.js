@@ -90,6 +90,7 @@ taskInformation.prototype.task001Entry = function() {
 taskInformation.prototype.task001 = function() {
 	var task001 = new taskData();
 	task001.addTaskSummary = "Task 001";
+	task001.taskDetailsSummary = task001["addTaskSummary"]
 	task001.taskStatus = "on hold";
 	task001.addTaskAssignee = "Test User2"
 	return task001;

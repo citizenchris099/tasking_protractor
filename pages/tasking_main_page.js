@@ -261,7 +261,7 @@ var allFilterSearch = function(value) {
 }
 
 var allFiltersSelection = function(value) {
-	return element(By.xpath("//div[contains(@data-reactid,'" + value + "')] [@class='checkbox']"));
+	return element(By.xpath("//div[contains(@data-reactid,'" + value + "')] [@class='checkboxsquare ']"));
 };
 
 var allFilterDueFromTo = function(value) {
