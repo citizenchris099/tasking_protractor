@@ -366,10 +366,18 @@ var closeSuccessMsg = function() {
  * actions: task details
  */
 var checkTaskDetailsBlockedCanceled = function(value1, value2, boolean) {
-	expect(taskDetailsBlockedCanceledHeader(value1).isDisplayed()).toBe(boolean);
-	expect(taskDetailsBlockedCanceledAlert().isDisplayed()).toBe(boolean);
-	expect(taskDetailsBlockedCanceledButton(value2).isDisplayed()).toBe(boolean);
+	expect(taskDetailsBlockedCanceledHeader(value1).isPresent()).toBe(boolean);
+	expect(taskDetailsBlockedCanceledAlert().isPresent()).toBe(boolean);
+	expect(taskDetailsBlockedCanceledButton(value2).isPresent()).toBe(boolean);
 };
+
+var unBlockReopenTask = function(value1, value2) {
+	taskDetailsBlockedCanceledButton(value2).click().then(function() {
+		checkTaskDetailsBlockedCanceled(value1, value2, false);
+	}, function(err) {
+		throw err;
+	})
+}
 
 var selectTaskStatus = function(value) {
 	taskStatusMenu().click();
@@ -447,8 +455,12 @@ var selectTaskQueueGroup = function(value) {
 	})
 };
 
+var checkTaskQueueGroupNum = function(value) {
+	expect(taskQueueGroup(value).isDisplayed()).toBe(true);
+};
+
 var checkTaskFlag = function(value, boolean) {
-	expect(taskFlag(value).isDisplayed()).toBe(boolean);
+	expect(taskFlag(value).isPresent()).toBe(boolean);
 };
 
 var checkCommentCountFlag = function(value, boolean) {
@@ -459,11 +471,11 @@ var checkCommentFlag = function(boolean) {
 	expect(commentFlag().isDisplayed()).toBe(boolean);
 };
 
-var checkTaskOverDueFlag = function(boolean){
+var checkTaskOverDueFlag = function(boolean) {
 	expect(taskOverDueFlag().isDisplayed()).toBe(boolean);
 };
 
-var checkTaskOverDueText = function(value, boolean){
+var checkTaskOverDueText = function(value, boolean) {
 	expect(taskOverDueText(value).isDisplayed()).toBe(boolean);
 }
 
@@ -513,9 +525,13 @@ var useAllFilters = function(value1, value2) {
 };
 
 var useAllFilterSearch = function(value1, value2, value3) {
+	sleep();
 	allFiltersMain().click();
 	element(locatorMap.get(value1)).click();
-	allFilterSearch(allFilterSearchMap.get(value1)).sendKeys(value2);
+	browser.actions().mouseMove(allFilterSearch(allFilterSearchMap.get(value1))).click().sendKeys(value2,
+			protractor.Key.ENTER).perform();
+	// allFilterSearch(allFilterSearchMap.get(value1)).sendKeys(value2);
+	sleep();
 	allFiltersSelection(value3).click();
 	allFilterSearch(allFilterSearchMap.get(value1)).clear().sendKeys("/", protractor.Key.BACK_SPACE, protractor.Key.TAB);
 	allFiltersMain().click();
@@ -618,6 +634,16 @@ tasking_main_page.prototype.checkTaskDetailsCanceled = function(obj, boolean) {
 	checkTaskDetailsBlockedCanceled("Task Canceled", "Reopen", boolean);
 };
 
+tasking_main_page.prototype.unBlockTask = function(obj) {
+	checkTaskDisplayed(obj["addTaskSummary"], true);
+	unBlockReopenTask("Task Blocked", "Unblock");
+};
+
+tasking_main_page.prototype.reopenTask = function(obj) {
+	checkTaskDisplayed(obj["addTaskSummary"], true);
+	unBlockReopenTask("Task Canceled", "Reopen");
+};
+
 tasking_main_page.prototype.blockTask = function(obj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	blockOrCancelTask("Block Task");
@@ -661,6 +687,10 @@ tasking_main_page.prototype.checkTaskInQueue = function(obj, value) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 };
 
+tasking_main_page.prototype.checkTaskQueueNum = function(value) {
+	checkTaskQueueGroupNum(value)
+};
+
 tasking_main_page.prototype.checkTaskStatus = function(obj) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	checkTaskStatus(obj);
@@ -677,7 +707,7 @@ tasking_main_page.prototype.checkTaskCommentFlags = function(obj, value, boolean
 	checkCommentFlag(boolean);
 };
 
-tasking_main_page.prototype.checkTaskOverDueFlags = function(obj, value, boolean){
+tasking_main_page.prototype.checkTaskOverDueFlags = function(obj, value, boolean) {
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 	checkTaskOverDueFlag(boolean);
 	checkTaskOverDueText(value, boolean);
@@ -733,6 +763,7 @@ tasking_main_page.prototype.myTasksFilter = function() {
 
 tasking_main_page.prototype.useSearchFilter = function(obj, value) {
 	useSearchFilter(value);
+	sleep();
 	checkTaskDisplayed(obj["addTaskSummary"], true);
 };
 

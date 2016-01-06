@@ -109,7 +109,7 @@ taskInformation.prototype.task002 = function() {
 };
 
 taskInformation.prototype.task003Entry = function() {
-	return [ "addTaskSummary", "labelEntry" ];
+	return [ "addTaskSummary", "labelEntry", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task003 = function() {
@@ -117,6 +117,7 @@ taskInformation.prototype.task003 = function() {
 	task003.addTaskSummary = "Task 003";
 	task003.taskStatus = "in progress";
 	task003.labelEntry = [ 'label 3', 'label 4' ];
+	task003.addTaskAssignee = "Test User1"
 	return task003;
 };
 
@@ -137,6 +138,7 @@ taskInformation.prototype.task004 = function() {
 	task004.existingCommentAuthor = "Test User1";
 	task004.existingCommentDateTime = displayDate(0);
 	task004.addTaskDescription = "a great description 1";
+	task004.taskDetailsDescription = task004["addTaskDescription"];
 	return task004;
 };
 
@@ -223,7 +225,7 @@ taskInformation.prototype.task010Entry = function() {
 	return [ "addTaskSummary", "labelEntry", "addTasklocation", "addTaskAssignee", "addedDays", "addTaskDescription" ];
 };
 
-var task010OBJ = function(){
+var task010OBJ = function() {
 	var task010 = new taskData();
 	task010.addTaskSummary = "Task 010";
 	task010.addedDays = 2;
@@ -243,13 +245,13 @@ taskInformation.prototype.task010 = function() {
 	return task010OBJ();
 };
 
-taskInformation.prototype.task010Clone = function(){
+taskInformation.prototype.task010Clone = function() {
 	var task010Clone = cloneTaskData(task010OBJ());
 	task010Clone.existingCommentAuthor = "Test User1";
 	task010Clone.existingCommentDateTime = displayDate(0);
 	task010Clone.existingCommentText = "a really well thought out test comment";
 	return task010Clone;
-	
+
 }
 
 taskInformation.prototype.task011Entry = function() {
@@ -265,7 +267,7 @@ taskInformation.prototype.task011 = function() {
 };
 
 taskInformation.prototype.task012Entry = function() {
-	return [ "addTaskSummary", "addedDays" ];
+	return [ "addTaskSummary", "addedDays", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task012 = function() {
@@ -274,28 +276,31 @@ taskInformation.prototype.task012 = function() {
 	task012.addedDays = 0;
 	task012.displayDate = displayDate(0);
 	task012.taskStatus = "in progress";
+	task012.addTaskAssignee = "Test User2"
 	return task012;
 };
 
 taskInformation.prototype.task013Entry = function() {
-	return [ "addTaskSummary" ];
+	return [ "addTaskSummary", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task013 = function() {
 	var task013 = new taskData();
 	task013.addTaskSummary = "Task 013";
 	task013.taskStatus = "in progress";
+	task013.addTaskAssignee = "Test User2"
 	return task013;
 };
 
 taskInformation.prototype.task014Entry = function() {
-	return [ "addTaskSummary" ];
+	return [ "addTaskSummary", "addTaskAssignee" ];
 };
 
 taskInformation.prototype.task014 = function() {
 	var task014 = new taskData();
 	task014.addTaskSummary = "Task 014";
 	task014.taskStatus = "in progress";
+	task014.addTaskAssignee = "Test User2"
 	return task014;
 };
 

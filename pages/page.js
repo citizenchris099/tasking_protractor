@@ -37,23 +37,18 @@ page.prototype.findElements = function(parent, child) {
 }
 
 page.prototype.dynamicBackSpace = function(element) {
-	return browser.actions().mouseMove(element).click()
-			.sendKeys(protractor.Key.BACK_SPACE).perform();
+	return browser.actions().mouseMove(element).click().sendKeys(protractor.Key.BACK_SPACE).perform();
 }
 
 page.prototype.dynamicSendKeys = function(parent, child, value) {
-	browser.actions().mouseMove(
-			browser.driver.findElement(parent).findElement(child)).click()
-			.sendKeys(value, protractor.Key.ENTER).perform();
+	browser.actions().mouseMove(browser.driver.findElement(parent).findElement(child)).click().sendKeys(value,
+			protractor.Key.ENTER).perform();
 };
 
 page.prototype.dynamicSendKeysLoop = function(parent, child, value) {
-	browser.actions().mouseMove(
-			browser.driver.findElement(parent).findElement(child)).click()
-			.perform();
-	for (count = 0; count < value.length; count++) {
-		browser.actions().sendKeys(value[count], protractor.Key.ENTER)
-				.perform();
+	browser.actions().mouseMove(browser.driver.findElement(parent).findElement(child)).click().perform();
+	for (var count = 0; count < value.length; count++) {
+		browser.actions().sendKeys(value[count], protractor.Key.ENTER).perform();
 	}
 };
 
