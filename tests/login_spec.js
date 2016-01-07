@@ -22,7 +22,8 @@ var task014Obj = taskInformation.task014();
 var task015Obj = taskInformation.task015();
 
 var testObj = [ task001Obj, task002Obj, task003Obj, task004Obj, task005Obj, task006Obj, task007Obj, task008Obj, task009Obj,
-		task010Obj, task011Obj, task012Obj, task013Obj, task014Obj, task015Obj ]
+		task010Obj, task011Obj, task012Obj, task013Obj, task014Obj, task015Obj ];
+// var testObj = [ task001Obj ]
 
 // ////////entry & edit data arrays//////////
 var taskEntry = [ "addTaskSummary", "addTaskDescription", "addTasklocation", "labelEntry", "addedDays", "addTaskAssignee" ];
@@ -334,12 +335,14 @@ describe('tasking tests', function() {
 				function task_in_queue_search_validation(obj, queue) {
 					it('fixture data search filter task present validation', function() {
 						tasking_main_page.tasksICreatedQuickFilter();
+						tasking_main_page.allFilterCountCheck("1", true)
 						tasking_main_page.checkTaskInQueue(obj, queue);
 					});
 				}
 				function task_not_in_queue_search_validation(obj, queue) {
 					it('fixture data search filter task present validation', function() {
 						tasking_main_page.tasksICreatedQuickFilter();
+						tasking_main_page.allFilterCountCheck("1", true)
 						tasking_main_page.checkTaskNotInQueue(obj, queue);
 					});
 				}
@@ -385,12 +388,14 @@ describe('tasking tests', function() {
 				function task_in_queue_search_validation(obj, queue) {
 					it('fixture data search filter task present validation > ', function() {
 						tasking_main_page.tasksIStarredQuickFilter();
+						tasking_main_page.allFilterCountCheck("1", true)
 						tasking_main_page.checkTaskInQueue(obj, queue);
 					});
 				}
 				function task_not_in_queue_search_validation(obj, queue) {
 					it('fixture data search filter task present validation > ', function() {
 						tasking_main_page.tasksIStarredQuickFilter();
+						tasking_main_page.allFilterCountCheck("1", true)
 						tasking_main_page.checkTaskNotInQueue(obj, queue);
 					});
 				}
@@ -410,7 +415,7 @@ describe('tasking tests', function() {
 						}
 					}
 				});
-				describe('tasks I starred quick filter validation:  test user 2', function() {
+				describe('tasks I starred quick filter validation:  test user 2 > ', function() {
 					beforeEach(function() {
 						login_page.isLoginPageLoaded();
 						login_page.taskingLogin(username002, password002);
@@ -428,16 +433,18 @@ describe('tasking tests', function() {
 				});
 			});
 
-			xdescribe('blocked tasks quick filter validation', function() {
+			xdescribe('blocked tasks quick filter validation > ', function() {
 				function task_in_queue_search_validation(obj, queue) {
 					it('fixture data search filter task present validation > ', function() {
 						tasking_main_page.blockedTasksQuickFilter();
+						tasking_main_page.allFilterCountCheck("1", true)
 						tasking_main_page.checkTaskInQueue(obj, queue);
 					});
 				}
 				function task_not_in_queue_search_validation(obj, queue) {
 					it('fixture data search filter task present validation > ', function() {
 						tasking_main_page.blockedTasksQuickFilter();
+						tasking_main_page.allFilterCountCheck("1", true)
 						tasking_main_page.checkTaskNotInQueue(obj, queue);
 					});
 				}
@@ -456,7 +463,216 @@ describe('tasking tests', function() {
 					}
 				}
 			});
+			describe('quick filter and all filter validation > ', function() {
+				function task_in_queue_validation(obj, queue, menu, selection) {
+					it('fixture data search filter task present validation > ', function() {
+						tasking_main_page.tasksICreatedQuickFilter();
+						tasking_main_page.useAllFilters(menu, selection);
+						tasking_main_page.checkTaskInQueue(obj, queue);
+					});
+				}
+				function filter_count_validation(menu, selection, count) {
+					it('filter count is correct > ', function() {
+						tasking_main_page.tasksICreatedQuickFilter();
+						tasking_main_page.useAllFilters(menu, selection);
+						tasking_main_page.allFilterCountCheck(count, true)
+					});
+				}
+				function queue_count_validation(menu, selection, count1, count2) {
+					it('filter count is correct > ', function() {
+						tasking_main_page.tasksICreatedQuickFilter();
+						tasking_main_page.useAllFilters(menu, selection);
+						tasking_main_page.checkTaskQueueNum(count1);
+						tasking_main_page.checkTaskQueueNum(count2);
+					});
+				}
+				function task_not_in_queue_validation(obj, queue, menu, selection) {
+					it('fixture data search filter task present validation > ', function() {
+						tasking_main_page.tasksICreatedQuickFilter();
+						tasking_main_page.useAllFilters(menu, selection);
+						tasking_main_page.checkTaskNotInQueue(obj, queue);
+					});
+				}
+				xdescribe('tasks i create & location 1 > ', function() {
+					var allFilterMenus = [ "allFilterLocation" ];
+					var allFilterSelections = [ "location 1" ];
+					var filterCount = "2";
+					describe('test user 1 > ', function() {
+						var openCount = "Open (2)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username001, password001);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else if (testObj[count] == task004Obj || testObj[count] == task009Obj) {
+								task_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
 
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+					describe('test user 2 > ', function() {
+						var openCount = "Open (0)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username002, password002);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+				});
+				xdescribe('tasks i create & location 1 & label > ', function() {
+					var allFilterMenus = [ "allFilterLocation", "allFilterLabels" ];
+					var allFilterSelections = [ "location 1", "label 1" ];
+					var filterCount = "3";
+					describe('test user 1 > ', function() {
+						var openCount = "Open (2)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username001, password001);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else if (testObj[count] == task004Obj || testObj[count] == task009Obj) {
+								task_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+					describe('test user 2 > ', function() {
+						var openCount = "Open (0)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username002, password002);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+				});
+				xdescribe('tasks i create & location & label & assignee > ', function() {
+					var allFilterMenus = [ "allFilterLocation", "allFilterLabels", "allFilterAssignee" ];
+					var filterCount = "4";
+					describe('test user 1 > ', function() {
+						var allFilterSelections = [ "location 1", "label 1", "testuid1" ];
+						var openCount = "Open (2)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username001, password001);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else if (testObj[count] == task004Obj || testObj[count] == task009Obj) {
+								task_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+					describe('test user 2 > ', function() {
+						var allFilterSelections = [ "location 2", "label 1", "testuid2" ];
+						var openCount = "Open (1)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username002, password002);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else if (testObj[count] == task008Obj) {
+								task_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+				});
+				describe('tasks i create & location & label & assignee & status > ', function() {
+					var allFilterMenus = [ "allFilterLocation", "allFilterLabels", "allFilterAssignee", "allFilterStatus" ];
+					var filterCount = "5";
+					describe('test user 1 > ', function() {
+						var allFilterSelections = [ "location 1", "label 1", "testuid1", "In Progress" ];
+						var openCount = "Open (2)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username001, password001);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else if (testObj[count] == task004Obj || testObj[count] == task009Obj) {
+								task_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+					describe('test user 2 > ', function() {
+						var allFilterSelections = [ "location 2", "label 1", "testuid2", "In Progress" ];
+						var openCount = "Open (1)";
+						var closedCount = "Closed (0)";
+						beforeEach(function() {
+							login_page.isLoginPageLoaded();
+							login_page.taskingLogin(username002, password002);
+							tasking_main_page.isMainPageLoaded();
+						});
+						for (var count = 0; count < testObj.length; count++) {
+							if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
+								task_not_in_queue_validation(testObj[count], "Closed", allFilterMenus, allFilterSelections);
+							} else if (testObj[count] == task008Obj) {
+								task_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							} else {
+								task_not_in_queue_validation(testObj[count], "Open", allFilterMenus, allFilterSelections);
+							}
+						}
+						filter_count_validation(allFilterMenus, allFilterSelections, filterCount);
+						queue_count_validation(allFilterMenus, allFilterSelections, openCount, closedCount);
+					});
+				});
+			});
 			xdescribe('all filters location validation', function() {
 				var allFilterMenus = [ "allFilterLocation" ];
 				function task_in_queue_location_validation(obj, queue, selection) {
@@ -507,7 +723,7 @@ describe('tasking tests', function() {
 						if (testObj[count] == task007Obj || testObj[count] == task006Obj) {
 							task_not_in_queue_location_validation(testObj[count], "Closed", allFilterSelections)
 						} else if (testObj[count] == task008Obj || testObj[count] == task010Obj) {
-							task_in_queue_location_search_validation(testObj[count], "Open", allFilterSelections)
+							task_in_queue_location_validation(testObj[count], "Open", allFilterSelections)
 						} else {
 							task_not_in_queue_location_validation(testObj[count], "Open", allFilterSelections)
 						}
@@ -1367,7 +1583,7 @@ describe('tasking tests', function() {
 				}
 			});
 		});
-		describe('edit task status tests', function() {
+		xdescribe('edit task status tests', function() {
 			beforeEach(function() {
 				login_page.isLoginPageLoaded();
 				login_page.taskingLogin(username001, password001);
